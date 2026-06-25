@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trebound · Sales Backend — Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="tokens.css" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:var(--font-sans);color:var(--ink-900);background:
+  radial-gradient(circle at 0 0,rgba(255,181,116,.16),transparent 32rem),
+  radial-gradient(circle at 100% 0,rgba(249,81,46,.08),transparent 28rem),var(--cream);
+  -webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.02em}
+.mono{font-family:var(--font-mono)}
+a{color:inherit}
+
+/* Login */
+.login{min-height:100vh;display:grid;grid-template-columns:1.1fr .9fr}
+.login .left{background:var(--grad-hero);color:#fff;padding:56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.login .left .glow{position:absolute;inset:0;background:radial-gradient(circle at 75% 18%,rgba(255,181,116,.4),transparent 24rem)}
+.login .left>*{position:relative}
+.login .brand{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:800;font-size:22px}
+.login .brand .logo-dot{width:40px;height:40px;border-radius:12px;background:var(--grad-brand);display:grid;place-items:center}
+.login h1{font-size:42px;line-height:1.08;max-width:460px}
+.login .left p{color:rgba(255,255,255,.78);font-size:15px;line-height:1.6;max-width:420px}
+.login .metrics{display:flex;gap:30px;margin-top:24px}
+.login .metrics b{font-family:var(--font-display);font-size:26px;display:block}
+.login .metrics span{color:rgba(255,255,255,.65);font-size:12px}
+.login .right{display:grid;place-items:center;padding:40px}
+.login .card{width:100%;max-width:380px;background:var(--paper);border:1px solid var(--ink-200);border-radius:24px;box-shadow:var(--shadow);padding:34px}
+.login .card h2{font-size:24px}
+.login .card .sub{color:var(--ink-600);font-size:14px;margin:8px 0 26px}
+.gbtn{width:100%;min-height:52px;border:1.5px solid var(--ink-200);background:#fff;border-radius:14px;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:11px;box-shadow:var(--shadow-sm)}
+.gbtn:hover{border-color:var(--ink-300)}
+.login .note{display:flex;gap:9px;font-size:12px;color:var(--ink-500);margin-top:20px;line-height:1.5}
+.login .note svg{width:16px;height:16px;flex:none;color:var(--ink-400);margin-top:1px}
+
+/* App shell */
+.app{display:none;min-height:100vh;grid-template-columns:248px 1fr}
+.app.show{display:grid}
+.side{background:var(--ink-950);color:#fff;padding:22px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
+.side .brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:800;font-size:18px;padding:0 8px 22px}
+.side .brand .logo-dot{width:32px;height:32px;border-radius:9px;background:var(--grad-brand);display:grid;place-items:center}
+.side .nav-t{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:800;padding:14px 10px 8px}
+.side nav{display:grid;gap:3px}
+.side nav button{display:flex;align-items:center;gap:11px;width:100%;border:0;background:transparent;color:rgba(255,255,255,.72);text-align:left;padding:11px 11px;border-radius:11px;font-weight:600;font-size:14px}
+.side nav button svg{width:18px;height:18px;opacity:.85}
+.side nav button:hover{background:rgba(255,255,255,.07);color:#fff}
+.side nav button.active{background:var(--grad-brand);color:#fff;box-shadow:0 8px 20px rgba(249,81,46,.3)}
+.side nav button .count{margin-left:auto;background:rgba(255,255,255,.16);font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px}
+.side nav button.active .count{background:rgba(255,255,255,.25)}
+.side .me{margin-top:auto;display:flex;align-items:center;gap:11px;padding:12px 8px;border-top:1px solid rgba(255,255,255,.1)}
+.side .me .av{width:36px;height:36px;border-radius:50%;background:var(--peach);color:var(--ink-950);display:grid;place-items:center;font-family:var(--font-display);font-weight:800}
+.side .me b{font-size:13px;display:block} .side .me span{font-size:11px;color:rgba(255,255,255,.55)}
+
+.main{min-width:0}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(250,246,241,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-200);display:flex;align-items:center;gap:16px;padding:15px 28px}
+.searchbox{flex:1;max-width:420px;display:flex;align-items:center;gap:9px;background:var(--paper);border:1px solid var(--ink-200);border-radius:12px;padding:10px 13px;color:var(--ink-500)}
+.searchbox svg{width:17px;height:17px} .searchbox input{border:0;outline:0;background:transparent;flex:1;font:inherit;color:var(--ink-900)}
+.topbar .spacer{flex:1}
+.iconbtn{width:40px;height:40px;border-radius:12px;border:1px solid var(--ink-200);background:var(--paper);display:grid;place-items:center;color:var(--ink-700);position:relative}
+.iconbtn svg{width:18px;height:18px}
+.iconbtn .dot{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--ember);border:2px solid var(--paper)}
+.btn{min-height:42px;border:0;border-radius:12px;padding:0 16px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-display)}
+.btn svg{width:17px;height:17px}
+.btn.primary{background:var(--grad-brand);color:#fff;box-shadow:0 10px 22px rgba(249,81,46,.26)}
+.btn.ghost{background:var(--paper);border:1.5px solid var(--ink-200);color:var(--ink-900)}
+.btn.dark{background:var(--ink-950);color:#fff}
+.btn.sm{min-height:34px;font-size:12.5px;padding:0 12px;border-radius:9px}
+
+.content{padding:26px 28px 60px}
+.panel{display:none} .panel.active{display:block}
+.ph{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:22px}
+.ph h1{font-size:30px} .ph p{margin:6px 0 0;color:var(--ink-600);font-size:14px}
+
+/* Cards / stats */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat{background:var(--paper);border:1px solid var(--ink-200);border-radius:18px;padding:18px;box-shadow:var(--shadow-sm)}
+.stat .top{display:flex;align-items:center;justify-content:space-between}
+.stat .ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center}
+.stat .ic svg{width:19px;height:19px}
+.ic.orange{background:var(--peach-soft);color:var(--ember-deep)} .ic.green{background:var(--success-soft);color:var(--success)}
+.ic.blue{background:var(--info-soft);color:var(--info)} .ic.yellow{background:var(--warning-soft);color:var(--warning-ink)}
+.stat .num{font-family:var(--font-display);font-size:32px;font-weight:800;margin-top:14px;letter-spacing:-.02em}
+.stat .lbl{color:var(--ink-600);font-size:13px;margin-top:2px}
+.stat .trend{font-size:12px;font-weight:700}
+.trend.up{color:var(--success)} .trend.down{color:var(--danger)}
+
+.grid-2{display:grid;grid-template-columns:1.5fr 1fr;gap:20px}
+.card{background:var(--paper);border:1px solid var(--ink-200);border-radius:20px;box-shadow:var(--shadow-sm)}
+.card-h{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--ink-100)}
+.card-h h3{font-size:17px} .card-h a{font-size:12.5px;color:var(--ember-hot);font-weight:700;text-decoration:none}
+.card-b{padding:8px 20px 18px}
+
+.attn{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--ink-100)}
+.attn:last-child{border-bottom:0}
+.attn .av{width:38px;height:38px;border-radius:11px;background:var(--ink-100);color:var(--ink-700);display:grid;place-items:center;font-family:var(--font-display);font-weight:800;flex:none}
+.attn .info{flex:1;min-width:0} .attn .info b{font-size:14px} .attn .info span{display:block;font-size:12px;color:var(--ink-500);margin-top:2px}
+.pill{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:5px 9px;border-radius:7px;white-space:nowrap}
+.pill.sent{background:var(--info-soft);color:var(--info)} .pill.viewed{background:var(--peach-soft);color:var(--ember-deep)}
+.pill.changed{background:var(--warning-soft);color:var(--warning-ink)} .pill.approved{background:var(--success-soft);color:var(--success)}
+.pill.draft{background:var(--ink-100);color:var(--ink-600)} .pill.booked{background:#dff3ea;color:#0d6b48} .pill.lost{background:var(--danger-soft);color:var(--danger)}
+.pill.unassigned{background:var(--danger-soft);color:var(--danger)}
+
+.timeline2{position:relative;padding-left:4px}
+.tl{display:flex;gap:12px;padding:9px 0}
+.tl .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none}
+.tl .ic svg{width:15px;height:15px}
+.tl .b{font-size:13px} .tl .b b{font-weight:700} .tl .b span{display:block;font-size:11.5px;color:var(--ink-500);margin-top:2px}
+
+/* Tables */
+.toolbar{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--ink-200);background:var(--paper);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700;color:var(--ink-600);display:inline-flex;gap:7px;align-items:center}
+.chip .c{background:var(--ink-100);font-size:11px;padding:1px 7px;border-radius:999px}
+.chip.active{background:var(--ink-950);border-color:var(--ink-950);color:#fff} .chip.active .c{background:rgba(255,255,255,.2)}
+.chip.danger.active{background:var(--danger);border-color:var(--danger)}
+table{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--ink-200);border-radius:18px;overflow:hidden}
+thead th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-500);font-weight:800;padding:14px 16px;background:var(--cream-2);border-bottom:1px solid var(--ink-200)}
+tbody td{padding:14px 16px;border-bottom:1px solid var(--ink-100);font-size:13.5px}
+tbody tr{cursor:pointer} tbody tr:hover{background:var(--cream-2)}
+tbody tr:last-child td{border-bottom:0}
+.who{display:flex;align-items:center;gap:11px}
+.who .av{width:36px;height:36px;border-radius:10px;background:var(--grad-brand);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:13px;flex:none}
+.who b{font-size:13.5px;display:block} .who span{font-size:11.5px;color:var(--ink-500)}
+.repbadge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px}
+.repbadge .av{width:24px;height:24px;border-radius:50%;background:var(--peach);color:var(--ink-950);display:grid;place-items:center;font-size:10px;font-weight:800;font-family:var(--font-display)}
+.repbadge.un{color:var(--danger);font-weight:700}
+
+/* Lead detail */
+.detail-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.kv{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--ink-100);font-size:13.5px}
+.kv:last-child{border-bottom:0} .kv span{color:var(--ink-500)} .kv b{font-weight:700}
+.note-add{display:flex;gap:9px;margin-top:14px}
+.note-add input{flex:1;border:1.5px solid var(--ink-200);border-radius:11px;padding:11px 13px;outline:0;font:inherit;background:var(--cream-2)}
+
+/* Proposal overview */
+.status-hero{background:var(--paper);border:1px solid var(--ink-200);border-radius:20px;padding:22px;box-shadow:var(--shadow-sm);margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.status-hero .big{flex:1;min-width:200px}
+.status-hero h2{font-size:23px} .status-hero .meta{color:var(--ink-600);font-size:13px;margin-top:5px}
+.status-hero .val{font-family:var(--font-display);font-weight:800;font-size:26px}
+.vrow{display:flex;gap:13px;padding:14px;border:1px solid var(--ink-200);border-radius:14px;margin-bottom:10px;align-items:center}
+.vrow.cur{border-color:var(--ember);box-shadow:0 0 0 3px rgba(249,81,46,.09)}
+.vrow .vno{width:40px;height:40px;border-radius:11px;background:var(--ink-100);color:var(--ink-700);font-family:var(--font-display);font-weight:800;display:grid;place-items:center;flex:none}
+.vrow.cur .vno{background:var(--grad-brand);color:#fff}
+.vrow .vm{flex:1} .vrow .vm b{font-size:14px} .vrow .vm span{display:block;font-size:12px;color:var(--ink-500);margin-top:2px}
+.vrow .vp{font-family:var(--font-mono);font-weight:700;font-size:13.5px}
+
+/* Reports */
+.funnel{display:grid;gap:9px}
+.fstage{display:flex;align-items:center;gap:14px}
+.fstage .lbl{width:120px;font-size:13px;font-weight:700;color:var(--ink-700)}
+.fstage .bar{flex:1;height:38px;border-radius:10px;background:var(--grad-brand);display:flex;align-items:center;padding:0 13px;color:#fff;font-weight:800;font-family:var(--font-display);box-shadow:var(--shadow-sm)}
+.fstage .bar.s2{opacity:.86} .fstage .bar.s3{opacity:.72} .fstage .bar.s4{opacity:.58} .fstage .bar.s5{opacity:.44}
+.lead-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--ink-100)}
+.lead-row:last-child{border-bottom:0}
+.lead-row .rank{width:26px;height:26px;border-radius:8px;background:var(--ink-100);font-weight:800;display:grid;place-items:center;font-size:12px;flex:none}
+.lead-row .rank.g{background:var(--warning-soft);color:var(--warning-ink)}
+.lead-row .bar{flex:1;height:8px;border-radius:99px;background:var(--ink-100);overflow:hidden}
+.lead-row .bar i{display:block;height:100%;background:var(--grad-brand);border-radius:99px}
+
+/* Settings */
+.set-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.set-card{background:var(--paper);border:1px solid var(--ink-200);border-radius:18px;padding:20px;box-shadow:var(--shadow-sm)}
+.set-card h3{font-size:16px;margin-bottom:4px} .set-card .d{font-size:12.5px;color:var(--ink-500);margin-bottom:16px}
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--ink-100)}
+.set-row:last-child{border-bottom:0}
+.set-row label{font-size:13.5px;font-weight:600} .set-row label span{display:block;font-size:11.5px;color:var(--ink-500);font-weight:500;margin-top:1px}
+.numin{width:92px;border:1.5px solid var(--ink-200);border-radius:10px;padding:9px 11px;font:inherit;text-align:right;outline:0;font-family:var(--font-mono);font-weight:700}
+.numin:focus{border-color:var(--ember)}
+.sw{width:46px;height:27px;border-radius:99px;background:var(--ink-200);position:relative;cursor:pointer;transition:.2s;flex:none;border:0}
+.sw::after{content:'';position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;transition:.2s;box-shadow:var(--shadow-sm)}
+.sw.on{background:var(--success)} .sw.on::after{left:22px}
+.conn{display:flex;align-items:center;gap:13px;padding:14px;border:1px solid var(--ink-200);border-radius:14px;background:var(--cream-2)}
+.conn .logo{width:42px;height:42px;border-radius:11px;background:#fff;border:1px solid var(--ink-200);display:grid;place-items:center;font-family:var(--font-display);font-weight:800;color:#1a73e8;flex:none}
+.conn .st{margin-left:auto;font-size:12px;font-weight:800;color:var(--success);display:flex;align-items:center;gap:6px}
+.conn .st::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--success)}
+
+/* Modals / dropdown / chat (interactive) */
+.scrim{position:fixed;inset:0;background:rgba(31,25,21,.55);backdrop-filter:blur(2px);z-index:90;display:none;align-items:center;justify-content:center;padding:24px}
+.scrim.open{display:flex;animation:fade .18s ease}
+.modal{background:var(--paper);width:100%;max-width:560px;border-radius:22px;box-shadow:var(--shadow-lg);overflow:hidden;max-height:90vh;display:flex;flex-direction:column;animation:pop .22s cubic-bezier(.2,.8,.2,1)}
+.modal.wide{max-width:680px}
+.modal-h{padding:18px 22px;border-bottom:1px solid var(--ink-100);display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.modal-h h3{font-size:19px}.modal-h p{margin:4px 0 0;font-size:12.5px;color:var(--ink-600)}
+.modal-x{width:34px;height:34px;border-radius:10px;border:1px solid var(--ink-200);background:var(--paper);display:grid;place-items:center;color:var(--ink-600);flex:none}
+.modal-x svg{width:16px;height:16px}
+.modal-b{padding:20px 22px;overflow-y:auto}
+.modal-f{padding:15px 22px;border-top:1px solid var(--ink-100);display:flex;gap:10px;justify-content:flex-end}
+.fld{margin-bottom:14px}.fld.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fld label{display:block;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-500);margin-bottom:7px}
+.fld input,.fld select{width:100%;border:1.5px solid var(--ink-200);border-radius:11px;padding:11px 12px;font:inherit;outline:0;background:var(--cream-2)}
+.fld input:focus,.fld select:focus{border-color:var(--ember);background:#fff}
+.src-toggle{display:flex;gap:9px}
+.src-toggle button{flex:1;border:1.5px solid var(--ink-200);background:var(--cream-2);border-radius:12px;padding:13px;font-weight:700;font-size:13.5px;color:var(--ink-700);text-align:left}
+.src-toggle button.on{border-color:var(--ember);background:var(--peach-soft);color:var(--ember-deep)}
+.src-toggle button span{display:block;font-size:11.5px;font-weight:500;color:var(--ink-500);margin-top:2px}
+.src-toggle button.on span{color:var(--ember-deep);opacity:.8}
+/* diff (compare) */
+.cmp-selrow{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.cmp-selrow select{flex:1;border:1.5px solid var(--ink-200);border-radius:11px;padding:10px 12px;font:inherit;background:var(--cream-2);outline:0}
+.cmp-selrow .arrow{color:var(--ink-400)}
+.diff-card{border:1px solid var(--ink-200);border-radius:16px;overflow:hidden}
+.diff-head{display:flex;background:var(--ink-950);color:#fff}
+.diff-head div{flex:1;padding:12px 15px;font-family:var(--font-display);font-weight:700;font-size:13px}
+.diff-head div:first-child{border-right:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6)}
+.diff-line{display:flex;border-bottom:1px solid var(--ink-100);font-size:12.5px}
+.diff-line:last-child{border-bottom:0}
+.diff-line>div{flex:1;padding:12px 15px}
+.diff-line>div:first-child{border-right:1px solid var(--ink-100);color:var(--ink-500)}
+.diff-line b{font-weight:700;color:var(--ink-900)}
+.diff-line .add{background:var(--success-soft)}.diff-line .chg{background:var(--warning-soft)}
+.diff-line .rm{background:var(--danger-soft);color:var(--danger);text-decoration:line-through}
+/* chat modal */
+.chatm{display:flex;flex-direction:column;height:560px;max-height:90vh}
+.chatm .modal-b{flex:1;background:var(--cream);display:flex;flex-direction:column;gap:11px;padding:18px 18px}
+.cbubble{max-width:80%;padding:10px 13px;border-radius:15px;font-size:13.5px;line-height:1.45}
+.cbubble.them{background:var(--paper);border:1px solid var(--ink-200);border-bottom-left-radius:5px;align-self:flex-start;box-shadow:var(--shadow-sm)}
+.cbubble.me{background:var(--grad-brand);color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
+.cbubble .time{display:block;font-size:10px;margin-top:5px;opacity:.6}
+.cbubble.sys{align-self:center;background:var(--peach-soft);color:var(--ember-deep);font-size:11.5px;font-weight:700;border-radius:999px;padding:7px 13px}
+.daystamp{text-align:center;font-size:11px;color:var(--ink-500);font-weight:700}
+.chat-input{padding:12px 16px;background:var(--paper);border-top:1px solid var(--ink-100);display:flex;gap:9px;align-items:center}
+.chat-input input{flex:1;border:1.5px solid var(--ink-200);border-radius:999px;padding:11px 15px;font:inherit;outline:0;background:var(--cream-2)}
+.chat-input input:focus{border-color:var(--ember)}
+.chat-input .send{width:42px;height:42px;border-radius:50%;background:var(--grad-brand);border:0;color:#fff;display:grid;place-items:center;flex:none}
+.chat-input .send svg{width:18px;height:18px}
+/* notifications dropdown */
+.notif-pop{position:fixed;top:64px;right:28px;width:348px;max-width:calc(100vw - 32px);background:var(--paper);border:1px solid var(--ink-200);border-radius:18px;box-shadow:var(--shadow-lg);z-index:95;display:none;overflow:hidden}
+.notif-pop.open{display:block;animation:pop .18s ease}
+.notif-h{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:1px solid var(--ink-100)}
+.notif-h h4{font-size:15px}.notif-h button{border:0;background:transparent;color:var(--ember-hot);font-weight:700;font-size:12px}
+.notif-list{max-height:380px;overflow-y:auto}
+.notif-item{display:flex;gap:12px;padding:13px 18px;border-bottom:1px solid var(--ink-100);cursor:pointer}
+.notif-item:hover{background:var(--cream-2)}.notif-item.unread{background:var(--peach-soft)}.notif-item.unread:hover{background:#ffe0cd}
+.notif-item .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none}.notif-item .ic svg{width:16px;height:16px}
+.notif-item .b{flex:1;font-size:13px}.notif-item .b b{font-weight:700}.notif-item .b span{display:block;font-size:11.5px;color:var(--ink-500);margin-top:2px}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:scale(.97) translateY(6px)}to{opacity:1;transform:none}}
+.caption{text-align:center;color:var(--ink-500);font-size:12px;margin:26px auto 0;max-width:700px;line-height:1.5}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(14px);background:var(--ink-950);color:#fff;padding:13px 18px;border-radius:14px;font-weight:700;font-size:13px;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:.25s;z-index:200;display:flex;gap:9px;align-items:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.toast svg{width:17px;height:17px;color:var(--peach)}
+
+@media(max-width:1080px){.stat-grid{grid-template-columns:repeat(2,1fr)}.grid-2,.detail-grid,.set-grid{grid-template-columns:1fr}.login{grid-template-columns:1fr}.login .left{display:none}}
+@media(max-width:760px){
+  .app.show{grid-template-columns:1fr}
+  .side{position:sticky;top:0;height:auto;flex-direction:row;align-items:center;gap:6px;padding:10px 12px;overflow-x:auto;z-index:30}
+  .side::-webkit-scrollbar{height:0}
+  .side .brand{padding:0 8px 0 0;font-size:15px;flex:none}
+  .side .brand .logo-dot{width:28px;height:28px}
+  .side .nav-t,.side .me{display:none}
+  .side nav{display:flex;gap:6px;flex:none}
+  .side nav button{padding:9px 12px;white-space:nowrap}
+  .side nav button .count{display:none}
+  .content{padding:18px 14px 50px}
+  table{display:block;overflow-x:auto;white-space:nowrap;font-size:12px;-webkit-overflow-scrolling:touch}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></symbol>
+  <symbol id="i-inbox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="6"/><rect x="13" y="7" width="3" height="10"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12l8.73-5.04M12 22V12"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-cash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3zM18 13l-1.5-7.5L2 2l3.5 14.5L13 18z"/></symbol>
+  <symbol id="i-google" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></symbol>
+</svg>
+
+<!-- ============ LOGIN ============ -->
+<div class="login" id="login">
+  <div class="left">
+    <div class="glow"></div>
+    <div class="brand"><span class="logo-dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span>Trebound</div>
+    <div>
+      <h1>Build a winning proposal in minutes, not days.</h1>
+      <p>Live pricing, branded proposals, version control and one shareable link your clients can approve and pay on.</p>
+      <div class="metrics">
+        <div><b>4 min</b><span>Avg build time</span></div>
+        <div><b>38%</b><span>Win rate</span></div>
+        <div><b>650+</b><span>Resorts in catalog</span></div>
+      </div>
+    </div>
+    <div style="color:rgba(255,255,255,.45);font-size:12px">© Trebound · Sales Proposal Platform</div>
+  </div>
+  <div class="right">
+    <div class="card">
+      <h2>Sign in</h2>
+      <p class="sub">Use your Trebound Google Workspace account.</p>
+      <button class="gbtn" onclick="enterApp()"><svg width="20" height="20"><use href="#i-google"/></svg> Continue with Google</button>
+      <div class="note"><svg><use href="#i-shield"/></svg><span>Restricted to <b>@trebound.com</b> accounts. Roles and permissions are managed by your admin.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div class="app" id="app">
+  <aside class="side">
+    <div class="brand"><span class="logo-dot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span>Trebound</div>
+    <div class="nav-t">Workspace</div>
+    <nav>
+      <button class="active" data-panel="dashboard"><svg><use href="#i-grid"/></svg> Dashboard</button>
+      <button data-panel="leads"><svg><use href="#i-inbox"/></svg> Leads <span class="count">5</span></button>
+      <button data-panel="proposals"><svg><use href="#i-doc"/></svg> Proposals <span class="count">23</span></button>
+      <button data-panel="reports"><svg><use href="#i-chart"/></svg> Reports</button>
+    </nav>
+    <div class="nav-t">Admin</div>
+    <nav>
+      <button data-panel="catalog"><svg><use href="#i-box"/></svg> Catalog &amp; pricing</button>
+      <button data-panel="settings"><svg><use href="#i-gear"/></svg> Settings</button>
+    </nav>
+    <div class="me"><span class="av">J</span><div><b>Jemcy</b><span>Sales Manager</span></div></div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="searchbox"><svg><use href="#i-search"/></svg><input placeholder="Search proposals, leads, clients…"></div>
+      <div class="spacer"></div>
+      <button class="iconbtn" id="bellBtn" aria-label="Notifications" onclick="toggleNotif(event)"><svg><use href="#i-bell"/></svg><span class="dot" id="bellDot"></span></button>
+      <button class="btn primary" onclick="openModal('newproposal')"><svg><use href="#i-plus"/></svg> New proposal</button>
+    </div>
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <section class="panel active" id="dashboard">
+        <div class="ph"><div><h1>Good morning, Jemcy</h1><p>Here's what needs your attention today.</p></div></div>
+        <div class="stat-grid">
+          <div class="stat"><div class="top"><span class="ic orange"><svg><use href="#i-doc"/></svg></span><span class="trend up">+12%</span></div><div class="num">23</div><div class="lbl">Open proposals</div></div>
+          <div class="stat"><div class="top"><span class="ic yellow"><svg><use href="#i-inbox"/></svg></span><span class="trend up">5 new</span></div><div class="num">5</div><div class="lbl">Leads awaiting action</div></div>
+          <div class="stat"><div class="top"><span class="ic blue"><svg><use href="#i-eye"/></svg></span><span class="trend up">+4</span></div><div class="num">8</div><div class="lbl">Viewed by client today</div></div>
+          <div class="stat"><div class="top"><span class="ic green"><svg><use href="#i-cash"/></svg></span><span class="trend up">+18%</span></div><div class="num">₹84L</div><div class="lbl">Booked this month</div></div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-h"><h3>Needs attention</h3><a href="#" data-panel="proposals">View all</a></div>
+            <div class="card-b">
+              <div class="attn"><span class="av">MG</span><div class="info"><b>Muthoot Group · Leadership Retreat</b><span>Client viewed v3 twice · no action in 2 days</span></div><span class="pill viewed">Viewed</span></div>
+              <div class="attn"><span class="av">IB</span><div class="info"><b>Infosys BPM · Annual Offsite</b><span>Change requested · awaiting your reply</span></div><span class="pill changed">Change req</span></div>
+              <div class="attn"><span class="av">WM</span><div class="info"><b>Walmart · Q3 Team Outing</b><span>Approved · deposit pending</span></div><span class="pill approved">Approved</span></div>
+              <div class="attn"><span class="av">CX</span><div class="info"><b>Cisco · Sales Kickoff</b><span>Discount approval requested by Priyanka</span></div><span class="pill draft">Approval</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-h"><h3>Recent client activity</h3></div>
+            <div class="card-b">
+              <div class="timeline2">
+                <div class="tl"><span class="ic green"><svg><use href="#i-cash"/></svg></span><div class="b"><b>Walmart paid the deposit</b><span>₹3.2L · 14 min ago</span></div></div>
+                <div class="tl"><span class="ic blue"><svg><use href="#i-eye"/></svg></span><div class="b"><b>Jeet (Muthoot) opened v3</b><span>Spent 4m 12s on pricing · 1h ago</span></div></div>
+                <div class="tl"><span class="ic yellow"><svg><use href="#i-edit"/></svg></span><div class="b"><b>Infosys requested changes</b><span>"Lighter Day 2" · 2h ago</span></div></div>
+                <div class="tl"><span class="ic orange"><svg><use href="#i-send"/></svg></span><div class="b"><b>You sent Cisco v1</b><span>Yesterday, 6:40 PM</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LEADS -->
+      <section class="panel" id="leads">
+        <div class="ph"><div><h1>Leads</h1><p>New enquiries from the calculator and manual entry. Assign unassigned leads to a rep.</p></div><button class="btn ghost"><svg><use href="#i-plus"/></svg> Add lead</button></div>
+        <div class="toolbar">
+          <button class="chip active">All <span class="c">12</span></button>
+          <button class="chip danger" id="unassignedChip">Unassigned <span class="c">3</span></button>
+          <button class="chip">Mine <span class="c">5</span></button>
+          <button class="chip">From calculator <span class="c">7</span></button>
+        </div>
+        <table>
+          <thead><tr><th>Company</th><th>Destination</th><th>Team</th><th>Source</th><th>Assigned rep</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr onclick="showPanel('lead-detail')"><td><div class="who"><span class="av">MG</span><div><b>Muthoot Group</b><span>jeet@muthootgroup.com</span></div></div></td><td>Chikmagalur</td><td>100</td><td>Calculator</td><td><span class="repbadge"><span class="av">J</span>Jemcy</span></td><td><span class="pill sent">Proposal sent</span></td></tr>
+            <tr onclick="showPanel('lead-detail')"><td><div class="who"><span class="av" style="background:linear-gradient(108deg,#2563c9,#5b9bff)">TC</span><div><b>TechCorp India</b><span>ananya@techcorp.in</span></div></div></td><td>Goa</td><td>60</td><td>Calculator</td><td><span class="repbadge un">Unassigned</span></td><td><span class="pill unassigned">Unassigned</span></td></tr>
+            <tr onclick="showPanel('lead-detail')"><td><div class="who"><span class="av" style="background:linear-gradient(108deg,#1f9d6b,#6fd6a8)">FF</span><div><b>FinFlow Pvt Ltd</b><span>rahul@finflow.com</span></div></div></td><td>Coorg</td><td>35</td><td>Manual</td><td><span class="repbadge un">Unassigned</span></td><td><span class="pill unassigned">Unassigned</span></td></tr>
+            <tr onclick="showPanel('lead-detail')"><td><div class="who"><span class="av" style="background:linear-gradient(108deg,#8a5cf6,#c4a8ff)">QR</span><div><b>Quantix R&amp;D</b><span>maya@quantix.io</span></div></div></td><td>Bangalore</td><td>120</td><td>Calculator</td><td><span class="repbadge"><span class="av" style="background:#ffd8b8">P</span>Priyanka</span></td><td><span class="pill viewed">Negotiating</span></td></tr>
+            <tr onclick="showPanel('lead-detail')"><td><div class="who"><span class="av" style="background:linear-gradient(108deg,#d92d1c,#ff8a6c)">HH</span><div><b>Helix Health</b><span>sara@helixhealth.com</span></div></div></td><td>Dubai</td><td>45</td><td>Referral</td><td><span class="repbadge un">Unassigned</span></td><td><span class="pill unassigned">Unassigned</span></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- LEAD DETAIL -->
+      <section class="panel" id="lead-detail">
+        <div class="ph"><div style="display:flex;align-items:center;gap:12px"><button class="iconbtn" onclick="showPanel('leads')" aria-label="Back"><svg><use href="#i-back"/></svg></button><div><h1>TechCorp India</h1><p>Lead from the self-serve calculator · 2 days ago</p></div></div><button class="btn primary" onclick="toast('Opening builder with this brief…')"><svg><use href="#i-arrow"/></svg> Create proposal</button></div>
+        <div class="detail-grid">
+          <div>
+            <div class="card" style="margin-bottom:20px">
+              <div class="card-h"><h3>Calculator brief</h3><span class="pill unassigned">Unassigned</span></div>
+              <div class="card-b">
+                <div class="kv"><span>Destination preference</span><b>Goa</b></div>
+                <div class="kv"><span>Team size</span><b>60 participants</b></div>
+                <div class="kv"><span>Nights</span><b>2</b></div>
+                <div class="kv"><span>Preferred dates</span><b>Oct 2026 (flexible)</b></div>
+                <div class="kv"><span>Experience type</span><b>Corporate offsite</b></div>
+                <div class="kv"><span>Budget hint</span><b>₹15–18k / person</b></div>
+                <div class="kv"><span>Auto-estimate sent</span><b>₹9.8L – ₹12.4L</b></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-h"><h3>Notes &amp; activity</h3></div>
+              <div class="card-b">
+                <div class="timeline2">
+                  <div class="tl"><span class="ic blue"><svg><use href="#i-send"/></svg></span><div class="b"><b>Auto-estimate emailed</b><span>System · 2 days ago</span></div></div>
+                  <div class="tl"><span class="ic orange"><svg><use href="#i-spark"/></svg></span><div class="b"><b>Lead synced to Pipedrive</b><span>Deal #4821 created · 2 days ago</span></div></div>
+                </div>
+                <div class="note-add"><input placeholder="Add a note…"><button class="btn dark sm">Add</button></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom:20px">
+              <div class="card-h"><h3>Contact</h3></div>
+              <div class="card-b">
+                <div class="kv"><span>Name</span><b>Ananya Rao</b></div>
+                <div class="kv"><span>Work email</span><b>ananya@techcorp.in</b></div>
+                <div class="kv"><span>Company</span><b>TechCorp India</b></div>
+                <div class="kv"><span>Phone</span><b>+91 98xxx xxx21</b></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-h"><h3>Assign to rep</h3></div>
+              <div class="card-b">
+                <p style="font-size:13px;color:var(--ink-600);margin:6px 0 14px">This lead is in the unassigned queue. As a manager, pick a rep to own it.</p>
+                <div style="display:grid;gap:9px">
+                  <button class="btn ghost" style="justify-content:flex-start;gap:10px" onclick="toast('Lead assigned to Jemcy · rep notified')"><span class="repbadge"><span class="av">J</span></span> Jemcy <span style="margin-left:auto;color:var(--ink-400);font-size:12px">4 open</span></button>
+                  <button class="btn ghost" style="justify-content:flex-start;gap:10px" onclick="toast('Lead assigned to Priyanka · rep notified')"><span class="repbadge"><span class="av" style="background:#ffd8b8">P</span></span> Priyanka <span style="margin-left:auto;color:var(--ink-400);font-size:12px">6 open</span></button>
+                  <button class="btn ghost" style="justify-content:flex-start;gap:10px" onclick="toast('Lead assigned to Arun · rep notified')"><span class="repbadge"><span class="av" style="background:#cfe6ff">A</span></span> Arun <span style="margin-left:auto;color:var(--ink-400);font-size:12px">3 open</span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROPOSALS LIST + OVERVIEW -->
+      <section class="panel" id="proposals">
+        <div class="ph"><div><h1>Proposals</h1><p>All active proposals across the team.</p></div></div>
+        <div class="toolbar">
+          <button class="chip active">All <span class="c">23</span></button>
+          <button class="chip">Draft <span class="c">4</span></button>
+          <button class="chip">Sent <span class="c">9</span></button>
+          <button class="chip">Approved <span class="c">3</span></button>
+          <button class="chip">Booked <span class="c">7</span></button>
+        </div>
+        <table>
+          <thead><tr><th>Proposal</th><th>Client</th><th>Rep</th><th>Value</th><th>Version</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr onclick="showPanel('overview')"><td><b>Leadership Retreat</b></td><td>Muthoot Group</td><td><span class="repbadge"><span class="av">J</span>Jemcy</span></td><td class="mono">₹23.0L</td><td>v3</td><td><span class="pill viewed">Viewed</span></td></tr>
+            <tr onclick="showPanel('overview')"><td><b>Annual Offsite</b></td><td>Infosys BPM</td><td><span class="repbadge"><span class="av" style="background:#ffd8b8">P</span>Priyanka</span></td><td class="mono">₹41.5L</td><td>v2</td><td><span class="pill changed">Change req</span></td></tr>
+            <tr onclick="showPanel('overview')"><td><b>Q3 Team Outing</b></td><td>Walmart</td><td><span class="repbadge"><span class="av">J</span>Jemcy</span></td><td class="mono">₹12.8L</td><td>v4</td><td><span class="pill booked">Booked</span></td></tr>
+            <tr onclick="showPanel('overview')"><td><b>Sales Kickoff</b></td><td>Cisco</td><td><span class="repbadge"><span class="av" style="background:#ffd8b8">P</span>Priyanka</span></td><td class="mono">₹28.2L</td><td>v1</td><td><span class="pill sent">Sent</span></td></tr>
+            <tr onclick="showPanel('overview')"><td><b>Engineering Offsite</b></td><td>Quantix R&amp;D</td><td><span class="repbadge"><span class="av" style="background:#cfe6ff">A</span>Arun</span></td><td class="mono">₹19.6L</td><td>v2</td><td><span class="pill draft">Draft</span></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- OVERVIEW -->
+      <section class="panel" id="overview">
+        <div class="ph"><div style="display:flex;align-items:center;gap:12px"><button class="iconbtn" onclick="showPanel('proposals')" aria-label="Back"><svg><use href="#i-back"/></svg></button><div><h1>Muthoot · Leadership Retreat</h1><p>Owned by Jemcy · created 18 Jun</p></div></div><div style="display:flex;gap:9px"><button class="btn ghost"><svg><use href="#i-plus"/></svg> New version</button><button class="btn dark" onclick="toast('Proposal re-sent to client')"><svg><use href="#i-send"/></svg> Resend</button></div></div>
+
+        <div class="status-hero">
+          <div class="big"><h2>Version 3 · <span style="color:var(--ember-hot)">Viewed</span></h2><div class="meta">Client opened v3 twice · last seen 1h ago · spent 4m 12s on pricing</div></div>
+          <div style="text-align:right"><div style="font-size:12px;color:var(--ink-500)">Proposal value</div><div class="val">₹23,01,472</div></div>
+          <span class="pill viewed" style="font-size:12px;padding:8px 12px">Awaiting client decision</span>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <div class="card" style="margin-bottom:20px">
+              <div class="card-h"><h3>Versions</h3><a href="#" onclick="openModal('compare');return false">Compare</a></div>
+              <div class="card-b">
+                <div class="vrow cur" style="cursor:pointer" onclick="openModal('compare')"><span class="vno">v3</span><div class="vm"><b>Current · sent 24 Jun</b><span>Added Drone Racing · 8% loyalty discount</span></div><span class="vp">₹23.0L</span></div>
+                <div class="vrow"><span class="vno">v2</span><div class="vm"><b>Sent 20 Jun</b><span>Upgraded to Trivik · 90→100 pax</span></div><span class="vp">₹23.6L</span></div>
+                <div class="vrow"><span class="vno">v1</span><div class="vm"><b>Sent 18 Jun</b><span>Initial · Golden Palms · 90 pax</span></div><span class="vp">₹21.5L</span></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-h"><h3>Client chat</h3><a href="#" onclick="openModal('chat');return false">Open</a></div>
+              <div class="card-b">
+                <div class="timeline2">
+                  <div class="tl"><span class="ic orange"><svg><use href="#i-spark"/></svg></span><div class="b"><b>Jeet:</b> "Can we make Day 2 lighter for senior folks?"<span>10:31 AM</span></div></div>
+                  <div class="tl"><span class="ic blue"><svg><use href="#i-send"/></svg></span><div class="b"><b>You:</b> "I'll move Bridge Brigade to optional + add a plantation walk."<span>10:33 AM</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card">
+              <div class="card-h"><h3>Client activity timeline</h3></div>
+              <div class="card-b">
+                <div class="timeline2">
+                  <div class="tl"><span class="ic blue"><svg><use href="#i-eye"/></svg></span><div class="b"><b>Opened v3 (2nd time)</b><span>1h ago · mobile</span></div></div>
+                  <div class="tl"><span class="ic yellow"><svg><use href="#i-edit"/></svg></span><div class="b"><b>Requested change</b><span>"Lighter Day 2" · 2h ago</span></div></div>
+                  <div class="tl"><span class="ic orange"><svg><use href="#i-send"/></svg></span><div class="b"><b>v3 sent</b><span>24 Jun, 10:24 AM</span></div></div>
+                  <div class="tl"><span class="ic blue"><svg><use href="#i-eye"/></svg></span><div class="b"><b>Opened v2</b><span>22 Jun</span></div></div>
+                  <div class="tl"><span class="ic green"><svg><use href="#i-spark"/></svg></span><div class="b"><b>Lead created from calculator</b><span>18 Jun</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- REPORTS -->
+      <section class="panel" id="reports">
+        <div class="ph"><div><h1>Reports</h1><p>Pipeline health and rep performance · this quarter.</p></div></div>
+        <div class="stat-grid">
+          <div class="stat"><div class="top"><span class="ic orange"><svg><use href="#i-doc"/></svg></span></div><div class="num">142</div><div class="lbl">Proposals sent</div></div>
+          <div class="stat"><div class="top"><span class="ic green"><svg><use href="#i-check"/></svg></span><span class="trend up">+6pp</span></div><div class="num">38%</div><div class="lbl">Win rate</div></div>
+          <div class="stat"><div class="top"><span class="ic blue"><svg><use href="#i-cash"/></svg></span></div><div class="num">₹22.4L</div><div class="lbl">Avg proposal value</div></div>
+          <div class="stat"><div class="top"><span class="ic yellow"><svg><use href="#i-spark"/></svg></span><span class="trend down">−0.5d</span></div><div class="num">3.2d</div><div class="lbl">Avg time to close</div></div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-h"><h3>Pipeline funnel</h3></div>
+            <div class="card-b" style="padding:18px 20px 22px">
+              <div class="funnel">
+                <div class="fstage"><span class="lbl">New leads</span><div class="bar" style="width:100%">142</div></div>
+                <div class="fstage"><span class="lbl">Proposal sent</span><div class="bar s2" style="width:82%">116</div></div>
+                <div class="fstage"><span class="lbl">Negotiating</span><div class="bar s3" style="width:58%">82</div></div>
+                <div class="fstage"><span class="lbl">Approved</span><div class="bar s4" style="width:42%">59</div></div>
+                <div class="fstage"><span class="lbl">Booked</span><div class="bar s5" style="width:38%">54</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-h"><h3>Rep leaderboard</h3></div>
+            <div class="card-b">
+              <div class="lead-row"><span class="rank g">1</span><span class="repbadge"><span class="av" style="background:#ffd8b8">P</span>Priyanka</span><div class="bar"><i style="width:92%"></i></div><b class="mono" style="font-size:12.5px">₹31L</b></div>
+              <div class="lead-row"><span class="rank">2</span><span class="repbadge"><span class="av">J</span>Jemcy</span><div class="bar"><i style="width:78%"></i></div><b class="mono" style="font-size:12.5px">₹26L</b></div>
+              <div class="lead-row"><span class="rank">3</span><span class="repbadge"><span class="av" style="background:#cfe6ff">A</span>Arun</span><div class="bar"><i style="width:54%"></i></div><b class="mono" style="font-size:12.5px">₹18L</b></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CATALOG (pointer) -->
+      <section class="panel" id="catalog">
+        <div class="ph"><div><h1>Catalog &amp; pricing</h1><p>Resorts, activities, add-ons and seasonal rates.</p></div></div>
+        <div class="card"><div class="card-b" style="padding:34px;text-align:center;color:var(--ink-600)">
+          <span class="ic orange" style="width:52px;height:52px;margin:0 auto 14px;display:grid"><svg style="width:24px;height:24px"><use href="#i-box"/></svg></span>
+          <h3 style="font-size:18px;margin-bottom:6px">Pricing-admin lives in its own mockup</h3>
+          <p style="max-width:420px;margin:0 auto 16px;font-size:13.5px">Seasonal rate entry for 650+ stays, activities and add-ons is its own screen set.</p>
+          <a class="btn primary" href="admin-pricing.html" style="text-decoration:none">Open pricing admin <svg><use href="#i-arrow"/></svg></a>
+        </div></div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="panel" id="settings">
+        <div class="ph"><div><h1>Settings</h1><p>Commercial defaults, approvals and integrations.</p></div><button class="btn primary" onclick="toast('Settings saved')"><svg><use href="#i-check"/></svg> Save changes</button></div>
+        <div class="set-grid">
+          <div class="set-card">
+            <h3>Commercial defaults</h3><div class="d">Applied to every new proposal; reps can override within caps.</div>
+            <div class="set-row"><label>Deposit %<span>Collected on approval</span></label><input class="numin" value="25"></div>
+            <div class="set-row"><label>GST %<span>Default tax rate</span></label><input class="numin" value="18"></div>
+            <div class="set-row"><label>Proposal validity<span>Days before expiry</span></label><input class="numin" value="7"></div>
+            <div class="set-row"><label>Per-person floor<span>Margin guard warning</span></label><input class="numin" value="12000"></div>
+          </div>
+          <div class="set-card">
+            <h3>Discount caps</h3><div class="d">Above a rep's cap requires manager approval.</div>
+            <div class="set-row"><label>Sales Rep cap</label><input class="numin" value="10"></div>
+            <div class="set-row"><label>Sales Manager cap</label><input class="numin" value="20"></div>
+            <div class="set-row"><label>Require approval above cap<span>Block send until approved</span></label><button class="sw on" onclick="this.classList.toggle('on')"></button></div>
+          </div>
+          <div class="set-card">
+            <h3>Integrations</h3><div class="d">Connected services.</div>
+            <div class="conn" style="margin-bottom:11px"><span class="logo">P</span><div><b style="font-size:14px">Pipedrive</b><div style="font-size:12px;color:var(--ink-500)">One-way sync · platform → CRM</div></div><span class="st">Connected</span></div>
+            <div class="conn"><span class="logo" style="color:var(--ember)">R</span><div><b style="font-size:14px">Razorpay</b><div style="font-size:12px;color:var(--ink-500)">Deposit collection</div></div><span class="st">Connected</span></div>
+          </div>
+          <div class="set-card">
+            <h3>Notifications</h3><div class="d">Channels for client &amp; team alerts.</div>
+            <div class="set-row"><label>Email (transactional)<span>OTP, sends, receipts</span></label><button class="sw on" onclick="this.classList.toggle('on')"></button></div>
+            <div class="set-row"><label>In-app<span>Rep &amp; manager alerts</span></label><button class="sw on" onclick="this.classList.toggle('on')"></button></div>
+            <div class="set-row"><label>WhatsApp<span>Deferred to v2 — no API yet</span></label><button class="sw" onclick="toast('WhatsApp Business API not provisioned yet')"></button></div>
+          </div>
+        </div>
+      </section>
+
+      <p class="caption">Mockup 2 of 4 · Trebound Sales Backend. Internal app (Google SSO). Click rows to drill into lead detail and proposal overview; use the sidebar to move between Dashboard, Leads, Proposals, Reports and Settings.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Notifications dropdown -->
+<div class="notif-pop" id="notifPop">
+  <div class="notif-h"><h4>Notifications</h4><button onclick="markAllRead()">Mark all read</button></div>
+  <div class="notif-list" id="notifList">
+    <div class="notif-item unread" onclick="fromNotif('overview')"><span class="ic green" style="background:var(--success-soft);color:var(--success)"><svg><use href="#i-cash"/></svg></span><div class="b"><b>Walmart paid the deposit</b><span>₹3.2L · 14 min ago</span></div></div>
+    <div class="notif-item unread" onclick="fromNotif('overview')"><span class="ic blue" style="background:var(--info-soft);color:var(--info)"><svg><use href="#i-eye"/></svg></span><div class="b"><b>Jeet (Muthoot) opened v3 again</b><span>1 hour ago</span></div></div>
+    <div class="notif-item unread" onclick="fromNotif('leads')"><span class="ic yellow" style="background:var(--warning-soft);color:var(--warning-ink)"><svg><use href="#i-edit"/></svg></span><div class="b"><b>Infosys requested changes</b><span>"Lighter Day 2" · 2 hours ago</span></div></div>
+    <div class="notif-item" onclick="fromNotif('leads')"><span class="ic orange" style="background:var(--peach-soft);color:var(--ember-deep)"><svg><use href="#i-inbox"/></svg></span><div class="b"><b>New unassigned lead · Helix Health</b><span>Yesterday</span></div></div>
+  </div>
+</div>
+
+<!-- New proposal modal -->
+<div class="scrim" id="m-newproposal">
+  <div class="modal">
+    <div class="modal-h"><div><h3>New proposal</h3><p>Start from a lead or a blank brief, then open the builder.</p></div><button class="modal-x" data-close><svg><use href="#i-x"/></svg></button></div>
+    <div class="modal-b">
+      <div class="fld"><label>Start from</label>
+        <div class="src-toggle">
+          <button type="button" class="on" data-src>From a lead<span>Pre-fills the brief</span></button>
+          <button type="button" data-src>Blank<span>Build from scratch</span></button>
+        </div>
+      </div>
+      <div class="fld"><label>Lead</label><select><option>TechCorp India · Goa · 60 pax</option><option>FinFlow Pvt Ltd · Coorg · 35 pax</option><option>Helix Health · Dubai · 45 pax</option></select></div>
+      <div class="fld row">
+        <div><label>Salesperson</label><select><option>Jemcy (me)</option><option>Priyanka</option><option>Arun</option></select></div>
+        <div><label>Destination</label><select><option>Goa</option><option>Bangalore</option><option>Chikmagalur</option><option>Coorg</option><option>Dubai</option></select></div>
+      </div>
+      <div class="fld"><label>Proposal title</label><input value="TechCorp Goa Offsite"></div>
+    </div>
+    <div class="modal-f">
+      <button class="btn ghost" data-close>Cancel</button>
+      <button class="btn primary" onclick="window.open('builder.html','_blank');closeModals();toast('Opening proposal builder…')">Open builder <svg><use href="#i-arrow"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- Compare versions modal -->
+<div class="scrim" id="m-compare">
+  <div class="modal wide">
+    <div class="modal-h"><div><h3>Compare versions</h3><p>Muthoot · Leadership Retreat</p></div><button class="modal-x" data-close><svg><use href="#i-x"/></svg></button></div>
+    <div class="modal-b">
+      <div class="cmp-selrow">
+        <select><option>v2 · sent 20 Jun</option><option>v1 · sent 18 Jun</option></select>
+        <span class="arrow"><svg width="20" height="20"><use href="#i-arrow"/></svg></span>
+        <select><option>v3 · current</option><option>v2 · sent 20 Jun</option></select>
+      </div>
+      <div class="diff-card">
+        <div class="diff-head"><div>Version 2 · ₹23,63,000</div><div>Version 3 · current · ₹23,01,472</div></div>
+        <div class="diff-line"><div>Drone Racing League</div><div class="add"><b>+ Added</b> · ₹1,65,000</div></div>
+        <div class="diff-line"><div>Resort: <b>Trivik</b></div><div>Resort: <b>Trivik</b></div></div>
+        <div class="diff-line"><div>Headcount: <b>100</b></div><div>Headcount: <b>100</b></div></div>
+        <div class="diff-line"><div>Discount: <b>0%</b></div><div class="chg">Discount: <b>8%</b> loyalty</div></div>
+        <div class="diff-line"><div class="rm">Cave dining add-on</div><div class="chg">Replaced with awards night</div></div>
+        <div class="diff-line"><div>Total: <b>₹23,63,000</b></div><div class="chg">Total: <b>₹23,01,472</b> (▼ ₹62k)</div></div>
+      </div>
+    </div>
+    <div class="modal-f"><button class="btn ghost" data-close>Close</button><button class="btn dark" onclick="closeModals();toast('Opened v3 in builder')">Edit v3</button></div>
+  </div>
+</div>
+
+<!-- Client chat modal -->
+<div class="scrim" id="m-chat">
+  <div class="modal chatm">
+    <div class="modal-h"><div style="display:flex;align-items:center;gap:11px"><span class="av" style="width:40px;height:40px;border-radius:50%;background:var(--grad-brand);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:800">JM</span><div><h3 style="font-size:16px">Jeet Muthoot</h3><p>Muthoot Group · client</p></div></div><button class="modal-x" data-close><svg><use href="#i-x"/></svg></button></div>
+    <div class="modal-b" id="repChatBody">
+      <div class="daystamp">Today</div>
+      <div class="cbubble sys">You shared proposal v3</div>
+      <div class="cbubble me">Hi Jeet! I've updated the plan with the Drone Racing League and applied your loyalty discount. Let me know what you think.<span class="time">10:24 AM</span></div>
+      <div class="cbubble them">Looks great. Can we make Day 2 a little lighter for the senior folks?<span class="time">10:31 AM</span></div>
+      <div class="cbubble me">Absolutely — I'll move Bridge Brigade to an optional track and add a plantation walk. Sending a v4 shortly.<span class="time">10:33 AM</span></div>
+    </div>
+    <div class="chat-input"><input id="repChatField" placeholder="Reply to Jeet…" aria-label="Message"><button class="send" aria-label="Send" onclick="sendRepChat()"><svg><use href="#i-send"/></svg></button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><svg><use href="#i-spark"/></svg><span id="toastMsg"></span></div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+function enterApp(){$('#login').style.display='none';$('#app').classList.add('show')}
+function showPanel(id){
+  $$('.panel').forEach(p=>p.classList.remove('active'));
+  const el=$('#'+id); if(el)el.classList.add('active');
+  // sidebar active state (map detail screens to their parent)
+  const parent={'lead-detail':'leads','overview':'proposals'}[id]||id;
+  $$('.side nav button').forEach(b=>b.classList.toggle('active',b.dataset.panel===parent));
+  window.scrollTo(0,0);
+}
+$$('[data-panel]').forEach(b=>b.addEventListener('click',()=>showPanel(b.dataset.panel)));
+let tT;function toast(m){$('#toastMsg').textContent=m;$('#toast').classList.add('show');clearTimeout(tT);tT=setTimeout(()=>$('#toast').classList.remove('show'),2400)}
+
+/* Modals */
+function openModal(id){closeNotif();const el=$('#m-'+id);if(el)el.classList.add('open')}
+function closeModals(){$$('.scrim').forEach(s=>s.classList.remove('open'))}
+$$('[data-close]').forEach(b=>b.addEventListener('click',closeModals));
+$$('.scrim').forEach(sc=>sc.addEventListener('click',e=>{if(e.target===sc)closeModals()}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModals();closeNotif()}});
+$$('[data-src]').forEach(b=>b.addEventListener('click',()=>{b.parentElement.querySelectorAll('[data-src]').forEach(x=>x.classList.remove('on'));b.classList.add('on')}));
+
+/* Notifications */
+function toggleNotif(e){if(e)e.stopPropagation();$('#notifPop').classList.toggle('open')}
+function closeNotif(){$('#notifPop').classList.remove('open')}
+function markAllRead(){$$('#notifList .notif-item').forEach(i=>i.classList.remove('unread'));const d=$('#bellDot');if(d)d.style.display='none';toast('All notifications marked read')}
+function fromNotif(panel){closeNotif();showPanel(panel)}
+document.addEventListener('click',e=>{const p=$('#notifPop'),b=$('#bellBtn');if(p&&p.classList.contains('open')&&!p.contains(e.target)&&b&&!b.contains(e.target))closeNotif()});
+
+/* Rep chat */
+function sendRepChat(){const f=$('#repChatField');if(!f.value.trim())return;const body=$('#repChatBody');const m=document.createElement('div');m.className='cbubble me';m.innerHTML=f.value.replace(/[<>]/g,'')+'<span class="time">Now</span>';body.appendChild(m);f.value='';body.scrollTop=body.scrollHeight;setTimeout(()=>{const r=document.createElement('div');r.className='cbubble them';r.innerHTML='Thanks Jemcy — that works for us!<span class="time">Now</span>';body.appendChild(r);body.scrollTop=body.scrollHeight;},900)}
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.activeElement===$('#repChatField'))sendRepChat()});
+
+Object.assign(window,{showPanel,enterApp,toast,openModal,closeModals,toggleNotif,markAllRead,fromNotif,sendRepChat});
+</script>
+</body>
+</html>

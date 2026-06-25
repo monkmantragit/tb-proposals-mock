@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trebound · Catalog &amp; Pricing Admin — Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="tokens.css" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:var(--font-sans);color:var(--ink-900);background:
+  radial-gradient(circle at 0 0,rgba(255,181,116,.14),transparent 32rem),var(--cream);-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.02em}
+.mono{font-family:var(--font-mono)}
+
+.wrap{max-width:1080px;margin:0 auto;padding:26px 22px 70px}
+.head{display:flex;align-items:center;gap:13px;margin-bottom:8px}
+.logo-dot{width:34px;height:34px;border-radius:10px;background:var(--grad-brand);display:grid;place-items:center;color:#fff}
+.head .crumb{font-size:12px;color:var(--ink-500);font-weight:600}
+.head h1{font-size:28px;margin-top:2px}
+.head .right{margin-left:auto;display:flex;gap:10px}
+.btn{min-height:42px;border:0;border-radius:12px;padding:0 16px;font-weight:700;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-display)}
+.btn svg{width:17px;height:17px}
+.btn.primary{background:var(--grad-brand);color:#fff;box-shadow:0 10px 22px rgba(249,81,46,.24)}
+.btn.ghost{background:var(--paper);border:1.5px solid var(--ink-200);color:var(--ink-900)}
+.btn.dark{background:var(--ink-950);color:#fff}
+.btn.sm{min-height:34px;font-size:12.5px;padding:0 12px;border-radius:9px}
+.sub{color:var(--ink-600);font-size:14px;margin:0 0 22px}
+
+/* progress banner */
+.coverage{background:var(--paper);border:1px solid var(--ink-200);border-radius:18px;padding:18px 20px;box-shadow:var(--shadow-sm);margin-bottom:22px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.coverage .ring{--p:42;width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--ember) calc(var(--p)*1%),var(--ink-100) 0);display:grid;place-items:center;flex:none}
+.coverage .ring i{width:48px;height:48px;border-radius:50%;background:var(--paper);display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:15px;font-style:normal}
+.coverage .ctext{flex:1;min-width:200px}
+.coverage .ctext h3{font-size:16px} .coverage .ctext p{font-size:13px;color:var(--ink-600);margin:4px 0 0}
+.coverage .stat{text-align:center;padding:0 14px}
+.coverage .stat b{font-family:var(--font-display);font-size:22px;display:block} .coverage .stat span{font-size:11.5px;color:var(--ink-500)}
+.coverage .warn{background:var(--warning-soft);color:var(--warning-ink);font-size:12px;font-weight:700;border-radius:10px;padding:9px 13px;display:flex;gap:8px;align-items:center}
+.coverage .warn svg{width:15px;height:15px}
+
+/* tabs */
+.tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+.tabs button{border:1.5px solid var(--ink-200);background:var(--paper);border-radius:12px;padding:9px 15px;font-weight:700;font-size:13.5px;color:var(--ink-600);display:inline-flex;gap:8px;align-items:center}
+.tabs button svg{width:16px;height:16px}
+.tabs button.active{background:var(--ink-950);border-color:var(--ink-950);color:#fff}
+
+.toolbar{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.searchbox{flex:1;min-width:220px;display:flex;align-items:center;gap:9px;background:var(--paper);border:1px solid var(--ink-200);border-radius:12px;padding:10px 13px;color:var(--ink-500)}
+.searchbox svg{width:17px;height:17px} .searchbox input{border:0;outline:0;background:transparent;flex:1;font:inherit;color:var(--ink-900)}
+.selpill{border:1.5px solid var(--ink-200);background:var(--paper);border-radius:11px;padding:9px 13px;font-weight:700;font-size:13px;color:var(--ink-700)}
+
+.panel{display:none}.panel.active{display:block}
+table{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--ink-200);border-radius:16px;overflow:hidden}
+thead th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-500);font-weight:800;padding:13px 16px;background:var(--cream-2);border-bottom:1px solid var(--ink-200)}
+tbody td{padding:11px 16px;border-bottom:1px solid var(--ink-100);font-size:13.5px;vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--cream-2)}
+.stay{display:flex;align-items:center;gap:11px}
+.stay .img{width:44px;height:38px;border-radius:9px;background-size:cover;background-position:center;flex:none;background-color:var(--ink-100)}
+.stay b{font-size:13.5px;display:block} .stay span{font-size:11.5px;color:var(--ink-500)}
+.rate-in{width:108px;border:1.5px solid var(--ink-200);border-radius:9px;padding:8px 10px 8px 22px;font-family:var(--font-mono);font-weight:700;font-size:13px;outline:0;background:var(--cream-2)}
+.rate-in:focus{border-color:var(--ember);background:#fff}
+.rate-wrap{position:relative;display:inline-block}
+.rate-wrap::before{content:'₹';position:absolute;left:9px;top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-size:12px;color:var(--ink-500);font-weight:700}
+.rate-in.empty{border-color:var(--danger);background:var(--danger-soft)}
+.tierbadge{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:4px 8px;border-radius:7px}
+.tierbadge.premium{background:var(--peach-soft);color:var(--ember-deep)} .tierbadge.value{background:var(--info-soft);color:var(--info)} .tierbadge.luxury{background:#efe4ff;color:#7038c8}
+.status-ic{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700}
+.status-ic.done{color:var(--success)} .status-ic.todo{color:var(--danger)}
+.status-ic svg{width:14px;height:14px}
+.unit-sel{border:1.5px solid var(--ink-200);border-radius:9px;padding:7px 9px;font:inherit;font-size:12.5px;background:var(--cream-2);outline:0}
+.season-toggle{display:inline-flex;border:1.5px solid var(--ink-200);border-radius:9px;overflow:hidden}
+.season-toggle button{border:0;background:var(--paper);padding:7px 11px;font-weight:700;font-size:12px;color:var(--ink-600)}
+.season-toggle button.on{background:var(--ink-950);color:#fff}
+
+/* season calendar */
+.cal-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:6px}
+.mon{border:1.5px solid var(--ink-200);border-radius:11px;padding:11px 8px;text-align:center;cursor:pointer;font-weight:700;font-size:13px;background:var(--paper)}
+.mon.high{border-color:var(--ember);background:var(--peach-soft);color:var(--ember-deep)}
+.mon small{display:block;font-size:10px;font-weight:700;color:var(--ink-400);margin-top:3px}
+.mon.high small{color:var(--ember)}
+.legend{display:flex;gap:16px;margin-top:14px;font-size:12.5px;color:var(--ink-600)}
+.legend i{display:inline-block;width:13px;height:13px;border-radius:4px;margin-right:6px;vertical-align:-2px}
+
+/* bulk modal */
+.scrim{position:fixed;inset:0;background:rgba(31,25,21,.55);backdrop-filter:blur(2px);z-index:80;display:none;align-items:center;justify-content:center;padding:20px}
+.scrim.open{display:flex}
+.modal{background:var(--paper);width:100%;max-width:440px;border-radius:22px;box-shadow:var(--shadow-lg);overflow:hidden}
+.modal-h{padding:18px 22px;border-bottom:1px solid var(--ink-100);display:flex;justify-content:space-between;align-items:center}
+.modal-h h3{font-size:18px} .modal-x{width:32px;height:32px;border-radius:9px;border:1px solid var(--ink-200);background:var(--paper);display:grid;place-items:center;color:var(--ink-600)}
+.modal-x svg{width:15px;height:15px}
+.modal-b{padding:20px 22px 24px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-500);margin-bottom:7px}
+.field input,.field select{width:100%;border:1.5px solid var(--ink-200);border-radius:11px;padding:11px 12px;font:inherit;outline:0;background:var(--cream-2)}
+.field input:focus,.field select:focus{border-color:var(--ember);background:#fff}
+
+.caption{text-align:center;color:var(--ink-500);font-size:12px;margin:26px auto 0;max-width:720px;line-height:1.5}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(14px);background:var(--ink-950);color:#fff;padding:13px 18px;border-radius:14px;font-weight:700;font-size:13px;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:.25s;z-index:200;display:flex;gap:9px;align-items:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.toast svg{width:17px;height:17px;color:var(--peach)}
+@media(max-width:760px){.cal-grid{grid-template-columns:repeat(3,1fr)}table{display:block;overflow-x:auto;white-space:nowrap;font-size:12px;-webkit-overflow-scrolling:touch}.rate-in{width:84px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12l8.73-5.04M12 22V12"/></symbol>
+  <symbol id="i-act" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></symbol>
+</svg>
+
+<div class="wrap">
+  <div class="head">
+    <a class="btn ghost sm" href="sales-backend.html" style="text-decoration:none" aria-label="Back to app"><svg><use href="#i-back"/></svg></a>
+    <span class="logo-dot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span>
+    <div><div class="crumb">Admin · Trebound</div><h1>Catalog &amp; pricing</h1></div>
+    <div class="right">
+      <button class="btn ghost" onclick="openBulk()"><svg><use href="#i-bolt"/></svg> Bulk update</button>
+      <button class="btn primary" onclick="toast('Pricing saved · 654 stays')"><svg><use href="#i-save"/></svg> Save all</button>
+    </div>
+  </div>
+  <p class="sub">Enter structured seasonal rates ops use to power live quotes and the public calculator.</p>
+
+  <div class="coverage">
+    <div class="ring"><i>42%</i></div>
+    <div class="ctext"><h3>Pricing coverage</h3><p>Structured rates entered so far. The calculator only quotes destinations that are fully priced.</p></div>
+    <div class="stat"><b>271</b><span>Priced</span></div>
+    <div class="stat"><b style="color:var(--danger)">383</b><span>Missing</span></div>
+    <div class="stat"><b>654</b><span>Total stays</span></div>
+    <div class="warn"><svg><use href="#i-alert"/></svg> Goa &amp; Coorg not yet calculator-ready</div>
+  </div>
+
+  <div class="tabs">
+    <button class="active" data-tab="stays"><svg><use href="#i-box"/></svg> Stays <span style="opacity:.6">271/654</span></button>
+    <button data-tab="activities"><svg><use href="#i-act"/></svg> Activities <span style="opacity:.6">88/116</span></button>
+    <button data-tab="addons"><svg><use href="#i-gift"/></svg> Add-ons <span style="opacity:.6">8/8</span></button>
+    <button data-tab="seasons"><svg><use href="#i-cal"/></svg> Season calendars</button>
+  </div>
+
+  <!-- STAYS -->
+  <section class="panel active" id="stays">
+    <div class="toolbar">
+      <div class="searchbox"><svg><use href="#i-search"/></svg><input placeholder="Search 654 stays…"></div>
+      <select class="selpill"><option>All destinations</option><option>Bangalore</option><option>Chikmagalur</option><option>Goa</option></select>
+      <select class="selpill"><option>All status</option><option>Missing price</option><option>Priced</option></select>
+    </div>
+    <table>
+      <thead><tr><th>Stay</th><th>Tier</th><th>Low / pppn</th><th>High / pppn</th><th>Capacity</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><div class="stay"><span class="img" style="background-image:url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=200&q=50')"></span><div><b>Trivik Hotels &amp; Resorts</b><span>Chikmagalur</span></div></div></td>
+          <td><span class="tierbadge premium">Premium</span></td>
+          <td><span class="rate-wrap"><input class="rate-in" value="7,800"></span></td>
+          <td><span class="rate-wrap"><input class="rate-in" value="9,800"></span></td>
+          <td>120</td>
+          <td><span class="status-ic done"><svg><use href="#i-check"/></svg> Priced</span></td>
+        </tr>
+        <tr>
+          <td><div class="stay"><span class="img" style="background-image:url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=200&q=50')"></span><div><b>Vana Resort</b><span>Bangalore</span></div></div></td>
+          <td><span class="tierbadge premium">Premium</span></td>
+          <td><span class="rate-wrap"><input class="rate-in" value="3,200"></span></td>
+          <td><span class="rate-wrap"><input class="rate-in" value="4,300"></span></td>
+          <td>220</td>
+          <td><span class="status-ic done"><svg><use href="#i-check"/></svg> Priced</span></td>
+        </tr>
+        <tr>
+          <td><div class="stay"><span class="img" style="background-image:url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=200&q=50')"></span><div><b>Taj Holiday Village</b><span>Goa</span></div></div></td>
+          <td><span class="tierbadge luxury">Luxury</span></td>
+          <td><span class="rate-wrap"><input class="rate-in empty" placeholder="—"></span></td>
+          <td><span class="rate-wrap"><input class="rate-in empty" placeholder="—"></span></td>
+          <td>180</td>
+          <td><span class="status-ic todo"><svg><use href="#i-alert"/></svg> Missing</span></td>
+        </tr>
+        <tr>
+          <td><div class="stay"><span class="img" style="background-image:url('https://images.unsplash.com/photo-1455587734955-081b22074882?auto=format&fit=crop&w=200&q=50')"></span><div><b>Elim Resort</b><span>Bangalore</span></div></div></td>
+          <td><span class="tierbadge value">Value</span></td>
+          <td><span class="rate-wrap"><input class="rate-in" value="2,500"></span></td>
+          <td><span class="rate-wrap"><input class="rate-in" value="3,400"></span></td>
+          <td>350</td>
+          <td><span class="status-ic done"><svg><use href="#i-check"/></svg> Priced</span></td>
+        </tr>
+        <tr>
+          <td><div class="stay"><span class="img" style="background-image:url('https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=200&q=50')"></span><div><b>Cinnamon Coorg</b><span>Coorg</span></div></div></td>
+          <td><span class="tierbadge premium">Premium</span></td>
+          <td><span class="rate-wrap"><input class="rate-in empty" placeholder="—"></span></td>
+          <td><span class="rate-wrap"><input class="rate-in empty" placeholder="—"></span></td>
+          <td>90</td>
+          <td><span class="status-ic todo"><svg><use href="#i-alert"/></svg> Missing</span></td>
+        </tr>
+        <tr>
+          <td><div class="stay"><span class="img" style="background-image:url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=200&q=50')"></span><div><b>Bab Al Shams Desert Resort</b><span>Dubai</span></div></div></td>
+          <td><span class="tierbadge luxury">Luxury</span></td>
+          <td><span class="rate-wrap"><input class="rate-in" value="18,000"></span></td>
+          <td><span class="rate-wrap"><input class="rate-in" value="26,000"></span></td>
+          <td>180</td>
+          <td><span class="status-ic done"><svg><use href="#i-check"/></svg> Priced</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ACTIVITIES -->
+  <section class="panel" id="activities">
+    <div class="toolbar">
+      <div class="searchbox"><svg><use href="#i-search"/></svg><input placeholder="Search 116 activities…"></div>
+      <select class="selpill"><option>All categories</option><option>Indoor</option><option>Outdoor</option><option>Leadership</option></select>
+    </div>
+    <table>
+      <thead><tr><th>Activity</th><th>Category</th><th>Pricing unit</th><th>Price</th><th>Group</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><b>The Lost Dutchman's Goldmine</b></td><td>Leadership</td><td><select class="unit-sel"><option selected>Per group</option><option>Per person</option></select></td><td><span class="rate-wrap"><input class="rate-in" value="1,25,000"></span></td><td>12–500</td><td><span class="status-ic done"><svg><use href="#i-check"/></svg></span></td></tr>
+        <tr><td><b>Drone Racing League</b></td><td>Indoor</td><td><select class="unit-sel"><option selected>Per group</option><option>Per person</option></select></td><td><span class="rate-wrap"><input class="rate-in" value="1,65,000"></span></td><td>20–200</td><td><span class="status-ic done"><svg><use href="#i-check"/></svg></span></td></tr>
+        <tr><td><b>Bridge Brigade</b></td><td>Outdoor</td><td><select class="unit-sel"><option>Per group</option><option selected>Per person</option></select></td><td><span class="rate-wrap"><input class="rate-in" value="850"></span></td><td>10–500</td><td><span class="status-ic done"><svg><use href="#i-check"/></svg></span></td></tr>
+        <tr><td><b>Virtual Escape Room</b></td><td>Indoor</td><td><select class="unit-sel"><option>Per group</option><option selected>Per person</option></select></td><td><span class="rate-wrap"><input class="rate-in empty" placeholder="—"></span></td><td>10–1000</td><td><span class="status-ic todo"><svg><use href="#i-alert"/></svg></span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ADD-ONS -->
+  <section class="panel" id="addons">
+    <div class="toolbar"><div class="searchbox"><svg><use href="#i-search"/></svg><input placeholder="Search add-ons…"></div><button class="btn dark sm" onclick="toast('New add-on row added')">+ Add add-on</button></div>
+    <table>
+      <thead><tr><th>Add-on</th><th>Type</th><th>Pricing model</th><th>Price</th><th>Active</th></tr></thead>
+      <tbody>
+        <tr><td><b>Transportation (AC coach)</b></td><td>Transport</td><td><select class="unit-sel"><option selected>Per group</option><option>Per person</option><option>Flat</option></select></td><td><span class="rate-wrap"><input class="rate-in" value="45,000"></span></td><td><span class="status-ic done"><svg><use href="#i-check"/></svg></span></td></tr>
+        <tr><td><b>Welcome gifting kit</b></td><td>Gifting</td><td><select class="unit-sel"><option>Per group</option><option selected>Per person</option><option>Flat</option></select></td><td><span class="rate-wrap"><input class="rate-in" value="850"></span></td><td><span class="status-ic done"><svg><use href="#i-check"/></svg></span></td></tr>
+        <tr><td><b>Photography &amp; aftermovie</b></td><td>Content</td><td><select class="unit-sel"><option selected>Per group</option><option>Flat</option></select></td><td><span class="rate-wrap"><input class="rate-in" value="55,000"></span></td><td><span class="status-ic done"><svg><use href="#i-check"/></svg></span></td></tr>
+        <tr><td><b>Meeting room &amp; AV</b></td><td>AV</td><td><select class="unit-sel"><option selected>Per group</option><option>Flat</option></select></td><td><span class="rate-wrap"><input class="rate-in" value="35,000"></span></td><td><span class="status-ic done"><svg><use href="#i-check"/></svg></span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- SEASONS -->
+  <section class="panel" id="seasons">
+    <div class="toolbar">
+      <select class="selpill" style="min-width:220px"><option>Goa</option><option>Bangalore</option><option>Chikmagalur</option><option>Coorg</option></select>
+      <span style="font-size:13px;color:var(--ink-600)">Tap a month to mark it <b>high season</b> for this destination.</span>
+    </div>
+    <div style="background:var(--paper);border:1px solid var(--ink-200);border-radius:18px;padding:20px;box-shadow:var(--shadow-sm)">
+      <h3 style="font-size:16px;margin-bottom:4px">Goa · season calendar</h3>
+      <p style="font-size:12.5px;color:var(--ink-600);margin:0 0 6px">Drives which rate (low/high) the engine applies for a given date.</p>
+      <div class="cal-grid" id="calGrid">
+        <div class="mon">Jan<small>Low</small></div><div class="mon">Feb<small>Low</small></div><div class="mon">Mar<small>Low</small></div>
+        <div class="mon">Apr<small>Low</small></div><div class="mon">May<small>Low</small></div><div class="mon">Jun<small>Low</small></div>
+        <div class="mon">Jul<small>Low</small></div><div class="mon">Aug<small>Low</small></div><div class="mon">Sep<small>Low</small></div>
+        <div class="mon high">Oct<small>High</small></div><div class="mon high">Nov<small>High</small></div><div class="mon high">Dec<small>High</small></div>
+      </div>
+      <div class="legend"><span><i style="background:var(--ink-100)"></i>Low season</span><span><i style="background:var(--peach-soft);border:1px solid var(--ember)"></i>High season</span></div>
+    </div>
+  </section>
+
+  <p class="caption">Mockup 4 of 4 · Catalog &amp; pricing admin (super-admin). This is the Phase-0 dependency from the implementation plan: structured seasonal rates the catalog doesn't have today (654 stays, only 23 with any price). Coverage gating keeps the calculator honest — it only quotes fully-priced destinations.</p>
+</div>
+
+<!-- bulk modal -->
+<div class="scrim" id="bulkScrim">
+  <div class="modal">
+    <div class="modal-h"><h3>Bulk price update</h3><button class="modal-x" onclick="closeBulk()"><svg><use href="#i-x"/></svg></button></div>
+    <div class="modal-b">
+      <div class="field"><label>Apply to</label><select><option>All stays in a destination</option><option>A tier within a destination</option><option>All activities in a category</option></select></div>
+      <div class="field"><label>Destination</label><select><option>Bangalore</option><option>Goa</option><option>Chikmagalur</option></select></div>
+      <div class="field"><label>Adjustment</label><input value="+8% on both low &amp; high rates"></div>
+      <button class="btn primary" style="width:100%" onclick="closeBulk();toast('Bulk update applied to 84 stays')"><svg><use href="#i-bolt"/></svg> Apply update</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><svg><use href="#i-spark"/></svg><span id="toastMsg"></span></div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+$$('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+  $$('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  $$('.panel').forEach(p=>p.classList.remove('active'));$('#'+b.dataset.tab).classList.add('active');
+}));
+$$('#calGrid .mon').forEach(m=>m.addEventListener('click',()=>{m.classList.toggle('high');m.querySelector('small').textContent=m.classList.contains('high')?'High':'Low'}));
+$$('.rate-in').forEach(i=>i.addEventListener('input',()=>i.classList.toggle('empty',!i.value)));
+function openBulk(){$('#bulkScrim').classList.add('open')}function closeBulk(){$('#bulkScrim').classList.remove('open')}
+$('#bulkScrim').addEventListener('click',e=>{if(e.target===$('#bulkScrim'))closeBulk()});
+let tT;function toast(m){$('#toastMsg').textContent=m;$('#toast').classList.add('show');clearTimeout(tT);tT=setTimeout(()=>$('#toast').classList.remove('show'),2400)}
+window.openBulk=openBulk;window.closeBulk=closeBulk;window.toast=toast;
+</script>
+</body>
+</html>

@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trebound · Client Portal — Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Warm "tb" design system — matched to founder's Proposal Platform prototype */
+  --cream:#faf6f1; --cream-2:#fff6ef; --paper:#ffffff;
+  --ember:#f9512e; --ember-hot:#e2541f; --ember-deep:#bb400f; --peach:#ffb574; --peach-soft:#ffe9dc;
+  --ink-950:#1f1915; --ink-900:#2a221c; --ink-700:#4b4039; --ink-600:#6b5f54; --ink-500:#8a7d72;
+  --ink-300:#c4bbb3; --ink-200:#e4ddd6; --ink-100:#f1ebe4;
+  --success:#1f9d6b; --success-soft:#e4f6ec; --warning-ink:#8a5a00; --warning-soft:#fcf1d6;
+  --info:#2563c9; --info-soft:#e5eefd; --danger:#d92d1c; --danger-soft:#fce8e4;
+  --grad-brand:linear-gradient(108deg,#f9512e,#ff8a4c);
+  --grad-hero:linear-gradient(150deg,#2a221c 0%,#4b2f22 55%,#bb400f 130%);
+  --shadow-sm:0 2px 8px rgba(43,34,28,.06);
+  --shadow:0 16px 40px rgba(43,34,28,.12);
+  --shadow-lg:0 28px 70px rgba(43,34,28,.20);
+  --r:18px; --r-lg:26px;
+  --font-display:'Outfit',system-ui,sans-serif;
+  --font-sans:'Plus Jakarta Sans',system-ui,sans-serif;
+  --font-mono:'Space Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:var(--font-sans); color:var(--ink-900);
+  background:
+    radial-gradient(circle at 12% 0,rgba(255,181,116,.22),transparent 30rem),
+    radial-gradient(circle at 100% 6%,rgba(249,81,46,.12),transparent 26rem),
+    var(--cream);
+  min-height:100vh; -webkit-font-smoothing:antialiased;
+}
+button{font:inherit;cursor:pointer}
+h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.02em}
+.mono{font-family:var(--font-mono)}
+
+/* ---------- Mockup shell ---------- */
+.shell{display:flex;flex-direction:column;align-items:center;padding:26px 16px 90px}
+.shell-head{width:100%;max-width:920px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+.shell-brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:800;font-size:18px;color:var(--ink-950)}
+.logo-dot{width:30px;height:30px;border-radius:9px;background:var(--grad-brand);display:grid;place-items:center;color:#fff;box-shadow:var(--shadow-sm)}
+.shell-brand small{display:block;font-family:var(--font-sans);font-weight:600;font-size:11px;color:var(--ink-500);letter-spacing:.04em}
+.screen-tabs{display:flex;gap:6px;background:var(--paper);border:1px solid var(--ink-200);padding:5px;border-radius:999px;box-shadow:var(--shadow-sm);flex-wrap:wrap}
+.screen-tabs button{border:0;background:transparent;border-radius:999px;padding:8px 13px;font-weight:700;font-size:12.5px;color:var(--ink-600);display:flex;align-items:center;gap:6px;min-height:36px}
+.screen-tabs button.active{background:var(--ink-950);color:#fff}
+.screen-tabs svg{width:15px;height:15px}
+
+/* ---------- Phone frame ---------- */
+.phone{width:100%;max-width:430px;background:var(--paper);border-radius:42px;border:1px solid var(--ink-200);box-shadow:var(--shadow-lg);overflow:hidden;position:relative}
+.notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:120px;height:26px;background:var(--ink-950);border-radius:0 0 16px 16px;z-index:40}
+.statusbar{display:flex;justify-content:space-between;align-items:center;padding:13px 24px 6px;font-size:12px;font-weight:700;color:var(--ink-900)}
+.statusbar .mono{font-size:13px}
+.statusbar .sb-icons{display:flex;gap:5px;align-items:center}
+.viewport{height:760px;overflow-y:auto;overflow-x:hidden;position:relative;scroll-behavior:smooth}
+.viewport::-webkit-scrollbar{width:0}
+
+/* App top bar inside portal */
+.appbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--ink-200);display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
+.appbar .ab-brand{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:800;font-size:15px}
+.appbar .ab-brand .logo-dot{width:26px;height:26px;border-radius:8px}
+.iconbtn{width:38px;height:38px;border-radius:11px;border:1px solid var(--ink-200);background:var(--paper);display:grid;place-items:center;color:var(--ink-700)}
+.iconbtn svg{width:18px;height:18px}
+.iconbtn .dot-badge{position:absolute;top:7px;right:7px;width:8px;height:8px;border-radius:50%;background:var(--ember);border:2px solid var(--paper)}
+
+/* ---------- Screens ---------- */
+.screen{display:none}
+.screen.active{display:block}
+
+/* OTP */
+.otp-wrap{min-height:760px;display:flex;flex-direction:column;background:var(--grad-hero);color:#fff;position:relative}
+.otp-wrap .glow{position:absolute;inset:0;background:radial-gradient(circle at 80% 12%,rgba(255,181,116,.4),transparent 22rem)}
+.otp-top{position:relative;padding:54px 28px 0;text-align:center}
+.otp-top .logo-dot{width:46px;height:46px;border-radius:13px;margin:0 auto 18px}
+.otp-top h1{font-size:27px;line-height:1.15}
+.otp-top p{color:rgba(255,255,255,.78);font-size:14px;margin:10px auto 0;max-width:300px;line-height:1.55}
+.otp-card{position:relative;margin-top:auto;background:var(--paper);color:var(--ink-900);border-radius:30px 30px 0 0;padding:26px 24px 34px}
+.otp-card h3{font-size:18px}
+.otp-card .sub{color:var(--ink-600);font-size:13px;margin:6px 0 20px}
+.field label{display:block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-500);margin-bottom:8px}
+.field input{width:100%;border:1.5px solid var(--ink-200);border-radius:13px;padding:14px 14px;font-size:15px;font-family:var(--font-sans);outline:none;background:var(--cream-2)}
+.field input:focus{border-color:var(--ember);box-shadow:0 0 0 4px rgba(249,81,46,.12);background:#fff}
+.otp-digits{display:flex;gap:9px;justify-content:space-between;margin-bottom:6px}
+.otp-digits input{width:100%;aspect-ratio:1;text-align:center;font-family:var(--font-mono);font-size:22px;font-weight:700;border:1.5px solid var(--ink-200);border-radius:14px;background:var(--cream-2);outline:none}
+.otp-digits input.filled{border-color:var(--ember);background:#fff;color:var(--ember-deep)}
+.resend{font-size:12.5px;color:var(--ink-500);text-align:center;margin:14px 0 18px}
+.resend b{color:var(--ember-hot)}
+.btn{width:100%;min-height:52px;border:0;border-radius:15px;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-display)}
+.btn svg{width:18px;height:18px}
+.btn.primary{background:var(--grad-brand);color:#fff;box-shadow:0 12px 26px rgba(249,81,46,.32)}
+.btn.primary:active{transform:translateY(1px)}
+.btn.ghost{background:var(--paper);color:var(--ink-900);border:1.5px solid var(--ink-200);box-shadow:var(--shadow-sm)}
+.btn.dark{background:var(--ink-950);color:#fff}
+.btn.block{width:100%}
+.trust-row{display:flex;align-items:center;justify-content:center;gap:7px;color:rgba(255,255,255,.7);font-size:11.5px;padding:18px 20px;position:relative}
+.trust-row svg{width:14px;height:14px}
+
+/* Proposal view */
+.hero{position:relative;color:#fff;padding:22px 20px 26px;background:var(--grad-hero);overflow:hidden}
+.hero .hero-img{position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,25,21,.15),rgba(31,25,21,.78)),url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=60');background-size:cover;background-position:center;opacity:.85}
+.hero>*{position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);padding:6px 11px;border-radius:999px}
+.eyebrow svg{width:13px;height:13px}
+.hero h1{font-size:27px;line-height:1.13;margin:14px 0 4px;max-width:300px}
+.hero .for{color:var(--peach);font-weight:700;font-size:14px}
+.hero-facts{display:flex;gap:18px;margin-top:20px;flex-wrap:wrap}
+.fact{display:flex;flex-direction:column}
+.fact .k{font-size:11px;color:rgba(255,255,255,.7);font-weight:600;display:flex;align-items:center;gap:5px}
+.fact .k svg{width:13px;height:13px}
+.fact .v{font-family:var(--font-display);font-weight:700;font-size:17px;margin-top:3px}
+.status-strip{display:flex;align-items:center;gap:9px;padding:13px 20px;background:var(--success-soft);color:#0d6b48;font-weight:700;font-size:13px;border-bottom:1px solid var(--ink-200)}
+.status-strip svg{width:17px;height:17px}
+.status-strip .valid{margin-left:auto;font-weight:600;color:var(--ink-600);font-size:12px}
+
+.sec{padding:24px 20px;border-bottom:1px solid var(--ink-100)}
+.sec-h{display:flex;align-items:center;gap:9px;margin-bottom:15px}
+.sec-h .ic{width:32px;height:32px;border-radius:10px;background:var(--peach-soft);color:var(--ember-deep);display:grid;place-items:center}
+.sec-h .ic svg{width:17px;height:17px}
+.sec-h h2{font-size:18px}
+.sec-h p{margin:2px 0 0;font-size:12px;color:var(--ink-500)}
+
+.incl{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.incl div{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--ink-700);background:var(--cream-2);border:1px solid var(--ink-100);border-radius:12px;padding:11px 12px}
+.incl svg{width:16px;height:16px;color:var(--success);flex:none}
+
+/* Itinerary */
+.timeline{position:relative;padding-left:8px}
+.day{position:relative;padding:0 0 6px 26px;border-left:2px solid var(--ink-200);margin-left:6px}
+.day:last-child{border-left-color:transparent}
+.day .node{position:absolute;left:-9px;top:2px;width:18px;height:18px;border-radius:50%;background:var(--grad-brand);border:3px solid #fff;box-shadow:var(--shadow-sm)}
+.day h4{font-family:var(--font-display);font-size:14px;color:var(--ember-deep)}
+.day .dn{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-500)}
+.slot{display:flex;gap:11px;margin:11px 0;align-items:flex-start}
+.slot .t{font-family:var(--font-mono);font-size:11.5px;color:var(--ink-500);min-width:54px;padding-top:2px}
+.slot .b{font-size:13px;color:var(--ink-800);line-height:1.45}
+.slot .b b{color:var(--ink-900);font-weight:700}
+.day{padding-bottom:18px}
+
+/* Resort card */
+.resort{border:1px solid var(--ink-200);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-sm)}
+.resort .rimg{height:158px;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.45)),url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=60');background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:14px;color:#fff}
+.resort .rimg .tier{background:rgba(255,255,255,.92);color:var(--ink-900);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:5px 9px;border-radius:999px}
+.resort .rbody{padding:15px 15px 17px}
+.resort .rbody h3{font-size:17px}
+.resort .rbody .loc{display:flex;align-items:center;gap:5px;color:var(--ink-500);font-size:12.5px;margin-top:4px}
+.resort .rbody .loc svg{width:14px;height:14px}
+.resort .rbody p{font-size:13px;color:var(--ink-700);line-height:1.5;margin:11px 0 0}
+.amen{display:flex;flex-wrap:wrap;gap:7px;margin-top:13px}
+.amen span{font-size:11px;font-weight:700;color:var(--ink-600);background:var(--ink-100);padding:6px 10px;border-radius:8px}
+
+/* Gallery */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gallery i{display:block;aspect-ratio:1;border-radius:13px;background-size:cover;background-position:center;box-shadow:var(--shadow-sm)}
+.g1{background-image:url('https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=400&q=60')}
+.g2{background-image:url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=400&q=60')}
+.g3{background-image:url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=400&q=60')}
+.g4{background-image:url('https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=400&q=60')}
+.g5{background-image:url('https://images.unsplash.com/photo-1438029071396-1e831a7fa6d8?auto=format&fit=crop&w=400&q=60')}
+.g6{background-image:url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=400&q=60');position:relative}
+.g6::after{content:'+12';position:absolute;inset:0;background:rgba(31,25,21,.5);color:#fff;border-radius:13px;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:18px}
+
+/* Pricing */
+.price-card{background:var(--ink-950);color:#fff;border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow)}
+.price-card .pl{display:flex;justify-content:space-between;align-items:center;padding:9px 0;font-size:13.5px;color:rgba(255,255,255,.72)}
+.price-card .pl strong{color:#fff;font-family:var(--font-mono);font-weight:700}
+.price-card .pl.disc strong{color:#7be0b4}
+.price-card hr{border:0;border-top:1px solid rgba(255,255,255,.14);margin:8px 0}
+.price-total{display:flex;justify-content:space-between;align-items:flex-end;padding-top:8px}
+.price-total small{color:rgba(255,255,255,.6);font-size:12px;display:block;margin-bottom:3px}
+.price-total .amt{font-family:var(--font-display);font-size:30px;font-weight:800;letter-spacing:-.02em}
+.pp{display:flex;justify-content:space-between;margin-top:16px;background:rgba(255,255,255,.07);border-radius:13px;padding:13px 15px;font-size:13px}
+.pp .mono{color:var(--peach);font-weight:700}
+.deposit-note{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:12px;color:rgba(255,255,255,.7)}
+.deposit-note svg{width:15px;height:15px;color:var(--peach)}
+
+/* Testimonials */
+.quote{background:var(--cream-2);border:1px solid var(--ink-100);border-left:3px solid var(--ember);border-radius:14px;padding:16px;margin-bottom:12px}
+.quote p{margin:0 0 12px;font-size:13.5px;line-height:1.55;color:var(--ink-800);font-style:italic}
+.quote .who{display:flex;align-items:center;gap:10px}
+.quote .av{width:34px;height:34px;border-radius:50%;background:var(--grad-brand);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:13px}
+.quote .who b{font-size:13px;display:block}
+.quote .who span{font-size:11.5px;color:var(--ink-500)}
+.logos{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.logos span{font-family:var(--font-display);font-weight:800;color:var(--ink-300);font-size:13px;letter-spacing:.02em}
+
+/* Sticky action bar */
+.actionbar{position:sticky;bottom:0;z-index:35;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-top:1px solid var(--ink-200);padding:12px 16px;display:flex;gap:10px;align-items:center}
+.actionbar .ab-secondary{display:flex;gap:8px}
+.actionbar .btn{min-height:48px;border-radius:14px;flex:1}
+.actionbar .btn.primary{font-size:14.5px}
+.ab-ic{width:48px;height:48px;border-radius:14px;border:1.5px solid var(--ink-200);background:var(--paper);display:grid;place-items:center;color:var(--ink-700);flex:none}
+.ab-ic svg{width:19px;height:19px}
+
+/* Versions */
+.page-pad{padding:20px}
+.page-title{font-size:22px;margin-bottom:4px}
+.page-sub{color:var(--ink-600);font-size:13px;margin-bottom:18px}
+.vrow{display:flex;gap:13px;padding:15px;border:1px solid var(--ink-200);border-radius:16px;background:var(--paper);margin-bottom:11px;box-shadow:var(--shadow-sm);position:relative}
+.vrow.current{border-color:var(--ember);box-shadow:0 0 0 3px rgba(249,81,46,.10)}
+.vrow .vno{width:42px;height:42px;border-radius:12px;background:var(--ink-100);color:var(--ink-700);font-family:var(--font-display);font-weight:800;display:grid;place-items:center;flex:none}
+.vrow.current .vno{background:var(--grad-brand);color:#fff}
+.vrow .vmeta{flex:1;min-width:0}
+.vrow .vmeta h4{font-size:14.5px;display:flex;align-items:center;gap:8px}
+.tagpill{font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px;border-radius:6px}
+.tagpill.cur{background:var(--success-soft);color:#0d6b48}
+.tagpill.old{background:var(--ink-100);color:var(--ink-500)}
+.vrow .vmeta .vd{font-size:12px;color:var(--ink-500);margin-top:3px}
+.vrow .vmeta .vsum{font-size:12.5px;color:var(--ink-700);margin-top:7px;line-height:1.4}
+.vrow .vprice{text-align:right;font-family:var(--font-mono);font-weight:700;font-size:13.5px;flex:none}
+.vrow .vprice .delta{font-size:11px;font-weight:700;margin-top:4px}
+.delta.up{color:var(--danger)} .delta.down{color:var(--success)}
+.diff-card{border:1px solid var(--ink-200);border-radius:18px;overflow:hidden;margin-top:6px}
+.diff-head{display:flex;background:var(--ink-950);color:#fff}
+.diff-head div{flex:1;padding:13px 15px;font-family:var(--font-display);font-weight:700;font-size:13px}
+.diff-head div:first-child{border-right:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6)}
+.diff-line{display:flex;border-bottom:1px solid var(--ink-100);font-size:12.5px}
+.diff-line>div{flex:1;padding:12px 15px}
+.diff-line>div:first-child{border-right:1px solid var(--ink-100);color:var(--ink-500)}
+.diff-line .chg{background:var(--warning-soft)}
+.diff-line .add{background:var(--success-soft)}
+.diff-line .rm{background:var(--danger-soft);color:var(--danger);text-decoration:line-through}
+.diff-line b{font-weight:700;color:var(--ink-900)}
+
+/* Chat */
+.chat-wrap{display:flex;flex-direction:column;height:760px;background:var(--cream)}
+.chat-head{padding:14px 18px;background:var(--paper);border-bottom:1px solid var(--ink-200);display:flex;align-items:center;gap:11px}
+.chat-head .av{width:40px;height:40px;border-radius:50%;background:var(--grad-brand);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:800}
+.chat-head h4{font-size:15px}
+.chat-head .on{font-size:11.5px;color:var(--success);font-weight:700;display:flex;align-items:center;gap:5px}
+.chat-head .on::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--success)}
+.chat-body{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:11px}
+.daystamp{text-align:center;font-size:11px;color:var(--ink-500);font-weight:700;margin:4px 0}
+.msg{max-width:78%;padding:11px 14px;border-radius:16px;font-size:13.5px;line-height:1.45}
+.msg.them{background:var(--paper);border:1px solid var(--ink-200);border-bottom-left-radius:5px;align-self:flex-start;box-shadow:var(--shadow-sm)}
+.msg.me{background:var(--grad-brand);color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
+.msg .time{display:block;font-size:10px;margin-top:5px;opacity:.6}
+.msg.system{align-self:center;background:var(--peach-soft);color:var(--ember-deep);font-size:11.5px;font-weight:700;border-radius:999px;padding:7px 13px;text-align:center}
+.chat-input{padding:12px 14px;background:var(--paper);border-top:1px solid var(--ink-200);display:flex;gap:9px;align-items:center}
+.chat-input input{flex:1;border:1.5px solid var(--ink-200);border-radius:999px;padding:12px 16px;font-size:14px;outline:none;background:var(--cream-2)}
+.chat-input input:focus{border-color:var(--ember)}
+.chat-input .send{width:44px;height:44px;border-radius:50%;background:var(--grad-brand);border:0;color:#fff;display:grid;place-items:center;flex:none}
+.chat-input .send svg{width:18px;height:18px}
+
+/* ---------- Modals ---------- */
+.sheet-scrim{position:absolute;inset:0;background:rgba(31,25,21,.55);backdrop-filter:blur(2px);z-index:50;display:none;align-items:flex-end}
+.sheet-scrim.open{display:flex;animation:fade .2s ease}
+.sheet{background:var(--paper);width:100%;border-radius:28px 28px 0 0;max-height:86%;overflow-y:auto;animation:slideup .26s cubic-bezier(.2,.8,.2,1)}
+.sheet-grip{width:42px;height:5px;border-radius:99px;background:var(--ink-200);margin:11px auto 4px}
+.sheet-h{padding:8px 22px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid var(--ink-100)}
+.sheet-h h3{font-size:19px}
+.sheet-h p{margin:5px 0 0;font-size:12.5px;color:var(--ink-600)}
+.sheet-x{width:34px;height:34px;border-radius:10px;border:1px solid var(--ink-200);background:var(--paper);display:grid;place-items:center;flex:none;color:var(--ink-600)}
+.sheet-x svg{width:16px;height:16px}
+.sheet-body{padding:20px 22px 26px}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes slideup{from{transform:translateY(100%)}to{transform:translateY(0)}}
+
+/* request changes */
+.toggle-list{display:grid;gap:10px;margin-bottom:18px}
+.toggle{display:flex;align-items:center;gap:12px;border:1.5px solid var(--ink-200);border-radius:14px;padding:13px 14px;cursor:pointer;transition:.15s}
+.toggle.on{border-color:var(--ember);background:var(--peach-soft)}
+.toggle .box{width:22px;height:22px;border-radius:7px;border:2px solid var(--ink-300);display:grid;place-items:center;flex:none;color:#fff}
+.toggle.on .box{background:var(--ember);border-color:var(--ember)}
+.toggle .box svg{width:13px;height:13px;opacity:0}
+.toggle.on .box svg{opacity:1}
+.toggle .lab{font-size:13.5px;font-weight:600}
+.toggle .lab span{display:block;font-size:11.5px;color:var(--ink-500);font-weight:500;margin-top:1px}
+textarea{width:100%;border:1.5px solid var(--ink-200);border-radius:14px;padding:13px;font-family:var(--font-sans);font-size:14px;resize:vertical;outline:none;background:var(--cream-2)}
+textarea:focus{border-color:var(--ember);background:#fff}
+
+/* e-sign */
+.review-box{background:var(--cream-2);border:1px solid var(--ink-100);border-radius:16px;padding:16px;margin-bottom:18px}
+.review-box .rl{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;color:var(--ink-700)}
+.review-box .rl b{color:var(--ink-900)}
+.review-box .rl.tot{border-top:1px dashed var(--ink-200);margin-top:6px;padding-top:11px;font-size:15px}
+.review-box .rl.tot b{font-family:var(--font-display);font-size:18px}
+.legal{font-size:11.5px;color:var(--ink-500);line-height:1.55;margin:16px 0 14px;display:flex;gap:9px}
+.legal svg{width:16px;height:16px;flex:none;color:var(--ink-400);margin-top:1px}
+.sign-pad{border:1.5px dashed var(--ink-300);border-radius:14px;padding:16px;text-align:center;background:var(--cream-2);margin-bottom:6px}
+.sign-pad label{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-500)}
+.sign-pad input{width:100%;border:0;background:transparent;text-align:center;font-family:'Outfit';font-size:24px;font-weight:700;color:var(--ink-900);outline:none;margin-top:6px;border-bottom:2px solid var(--ink-200);padding-bottom:8px}
+.sign-pad input:focus{border-color:var(--ember)}
+.audit{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 18px}
+.audit div{background:var(--ink-100);border-radius:10px;padding:9px 11px}
+.audit .k{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-500);font-weight:800}
+.audit .v{font-family:var(--font-mono);font-size:12px;color:var(--ink-800);margin-top:3px}
+
+/* pay */
+.pay-amt{text-align:center;padding:6px 0 18px}
+.pay-amt small{color:var(--ink-500);font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.pay-amt .big{font-family:var(--font-display);font-size:42px;font-weight:800;letter-spacing:-.02em;margin-top:6px}
+.pay-amt .of{font-size:12.5px;color:var(--ink-500);margin-top:4px}
+.paymethods{display:grid;gap:10px;margin-bottom:18px}
+.pm{display:flex;align-items:center;gap:13px;border:1.5px solid var(--ink-200);border-radius:14px;padding:14px;cursor:pointer}
+.pm.on{border-color:var(--ember);background:var(--peach-soft)}
+.pm .pmic{width:38px;height:38px;border-radius:10px;background:var(--paper);border:1px solid var(--ink-200);display:grid;place-items:center;color:var(--ember-deep)}
+.pm .pmic svg{width:19px;height:19px}
+.pm .pmname{font-weight:700;font-size:14px;flex:1}
+.pm .pmname span{display:block;font-size:11.5px;color:var(--ink-500);font-weight:500}
+.pm .radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-300);flex:none}
+.pm.on .radio{border-color:var(--ember);border-width:6px}
+.secure{display:flex;align-items:center;justify-content:center;gap:7px;color:var(--ink-500);font-size:11.5px;margin-top:14px}
+.secure svg{width:14px;height:14px}
+.rzp{font-family:var(--font-display);font-weight:800;color:#3395ff}
+
+/* success */
+.success-screen{text-align:center;padding:30px 22px 24px}
+.success-screen .ring{width:88px;height:88px;border-radius:50%;background:var(--success-soft);display:grid;place-items:center;margin:0 auto 18px}
+.success-screen .ring svg{width:44px;height:44px;color:var(--success)}
+.success-screen h3{font-size:22px}
+.success-screen p{color:var(--ink-600);font-size:13.5px;line-height:1.55;margin:10px auto 20px;max-width:300px}
+.receipt{background:var(--cream-2);border:1px solid var(--ink-100);border-radius:14px;padding:14px 16px;text-align:left;margin-bottom:18px}
+.receipt .rl{display:flex;justify-content:space-between;font-size:12.5px;padding:5px 0;color:var(--ink-600)}
+.receipt .rl b{color:var(--ink-900);font-family:var(--font-mono)}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(14px);background:var(--ink-950);color:#fff;padding:13px 18px;border-radius:14px;font-weight:700;font-size:13px;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:.25s;z-index:200;display:flex;gap:9px;align-items:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast svg{width:17px;height:17px;color:var(--peach)}
+
+.caption{max-width:430px;text-align:center;color:var(--ink-500);font-size:12px;margin-top:18px;line-height:1.5}
+
+@media(max-width:520px){
+  .shell{padding:14px 8px 80px}
+  .phone{border-radius:0;border:0;box-shadow:none;max-width:100%}
+  .viewport{height:auto;min-height:calc(100vh - 120px)}
+  .notch{display:none}
+  .chat-wrap{height:auto;min-height:calc(100vh - 60px)}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- SVG sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19l-6 2V5l6-2 6 2 6-2v16l-6 2-6-2zM9 3v16M15 5v16"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3zM18 13l-1.5-7.5L2 2l3.5 14.5L13 18zM2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l4 2"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="18" height="10" rx="2"/><rect x="4" y="9" width="13" height="6" rx="1" fill="currentColor"/><path d="M22 11v2" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="shell">
+  <div class="shell-head">
+    <div class="shell-brand">
+      <span class="logo-dot"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span>
+      <div>Client Portal
+        <small>Mockup · warm-orange design system · mobile-first</small>
+      </div>
+    </div>
+    <nav class="screen-tabs" aria-label="Prototype screens">
+      <button class="active" data-go="otp"><svg><use href="#i-lock"/></svg>OTP</button>
+      <button data-go="proposal"><svg><use href="#i-doc"/></svg>Proposal</button>
+      <button data-go="versions"><svg><use href="#i-history"/></svg>Versions</button>
+      <button data-go="chat"><svg><use href="#i-chat"/></svg>Chat</button>
+    </nav>
+  </div>
+
+  <div class="phone">
+    <div class="notch"></div>
+    <div class="statusbar">
+      <span class="mono">9:41</span>
+      <span class="sb-icons"><svg width="17" height="12" style="color:var(--ink-900)"><use href="#i-wifi"/></svg><svg width="24" height="13" style="color:var(--ink-900)"><use href="#i-battery"/></svg></span>
+    </div>
+    <div class="viewport" id="viewport">
+
+      <!-- ============ SCREEN: OTP ============ -->
+      <section class="screen active" id="screen-otp">
+        <div class="otp-wrap">
+          <div class="glow"></div>
+          <div class="otp-top">
+            <span class="logo-dot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span>
+            <h1>Your offsite proposal is ready</h1>
+            <p>Trebound prepared a tailored plan for <b style="color:#fff">Muthoot Group</b>. Verify your email to view it securely.</p>
+          </div>
+          <div class="otp-card">
+            <h3>Enter the code we emailed you</h3>
+            <p class="sub">Sent to <b>jeet@muthootgroup.com</b> · valid for 10 minutes</p>
+            <div class="otp-digits" id="otpDigits">
+              <input maxlength="1" inputmode="numeric" aria-label="OTP digit 1">
+              <input maxlength="1" inputmode="numeric" aria-label="OTP digit 2">
+              <input maxlength="1" inputmode="numeric" aria-label="OTP digit 3">
+              <input maxlength="1" inputmode="numeric" aria-label="OTP digit 4">
+              <input maxlength="1" inputmode="numeric" aria-label="OTP digit 5">
+              <input maxlength="1" inputmode="numeric" aria-label="OTP digit 6">
+            </div>
+            <p class="resend">Didn't get it? Resend in <b>00:24</b></p>
+            <button class="btn primary" data-go="proposal">Verify &amp; view proposal
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <div class="trust-row" style="color:var(--ink-500)">
+              <svg><use href="#i-shield"/></svg> Passwordless &amp; encrypted — no account needed
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SCREEN: PROPOSAL ============ -->
+      <section class="screen" id="screen-proposal">
+        <div class="appbar">
+          <div class="ab-brand"><span class="logo-dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span>Trebound</div>
+          <div style="display:flex;gap:8px">
+            <button class="iconbtn" data-go="versions" aria-label="Version history"><svg><use href="#i-history"/></svg></button>
+            <button class="iconbtn" style="position:relative" data-go="chat" aria-label="Chat with rep"><svg><use href="#i-chat"/></svg><span class="dot-badge"></span></button>
+          </div>
+        </div>
+
+        <div class="status-strip">
+          <svg><use href="#i-spark"/></svg> Version 2 · Updated for you
+          <span class="valid">Valid till 8 Jul 2026</span>
+        </div>
+
+        <div class="hero">
+          <div class="hero-img"></div>
+          <span class="eyebrow"><svg><use href="#i-spark"/></svg> Leadership Offsite</span>
+          <h1>Muthoot Group Annual Leadership Retreat</h1>
+          <div class="for">Prepared for Jeet Muthoot · Curated by Jemcy</div>
+          <div class="hero-facts">
+            <div class="fact"><span class="k"><svg><use href="#i-pin"/></svg> Destination</span><span class="v">Chikmagalur</span></div>
+            <div class="fact"><span class="k"><svg><use href="#i-users"/></svg> Team</span><span class="v">100 pax</span></div>
+            <div class="fact"><span class="k"><svg><use href="#i-moon"/></svg> Nights</span><span class="v">2 nights</span></div>
+            <div class="fact"><span class="k"><svg><use href="#i-cal"/></svg> Dates</span><span class="v">12–14 Sep</span></div>
+          </div>
+        </div>
+
+        <!-- Inclusions -->
+        <div class="sec">
+          <div class="sec-h"><span class="ic"><svg><use href="#i-check"/></svg></span><div><h2>What's included</h2><p>Everything in this experience</p></div></div>
+          <div class="incl">
+            <div><svg><use href="#i-check"/></svg> Premium plantation stay</div>
+            <div><svg><use href="#i-check"/></svg> All meals &amp; hi-tea</div>
+            <div><svg><use href="#i-check"/></svg> 3 curated activities</div>
+            <div><svg><use href="#i-check"/></svg> Leadership facilitation</div>
+            <div><svg><use href="#i-check"/></svg> Welcome gifting kit</div>
+            <div><svg><use href="#i-check"/></svg> AC transport (Blr↔Resort)</div>
+            <div><svg><use href="#i-check"/></svg> Photography + aftermovie</div>
+            <div><svg><use href="#i-check"/></svg> On-ground Trebound crew</div>
+          </div>
+        </div>
+
+        <!-- Itinerary -->
+        <div class="sec">
+          <div class="sec-h"><span class="ic"><svg><use href="#i-map"/></svg></span><div><h2>Day-by-day itinerary</h2><p>Tentative — refined before confirmation</p></div></div>
+          <div class="timeline">
+            <div class="day">
+              <span class="node"></span>
+              <div class="dn">Day 1 · Fri</div><h4>Arrival &amp; The Lost Dutchman</h4>
+              <div class="slot"><span class="t">08:00</span><span class="b">Depart Bangalore in AC coaches with breakfast on board</span></div>
+              <div class="slot"><span class="t">12:30</span><span class="b">Check-in, welcome drinks &amp; lunch at the plantation</span></div>
+              <div class="slot"><span class="t">16:00</span><span class="b"><b>The Lost Dutchman's Goldmine</b> — flagship leadership simulation</span></div>
+              <div class="slot"><span class="t">20:00</span><span class="b">Bonfire, dinner &amp; live music</span></div>
+            </div>
+            <div class="day">
+              <span class="node"></span>
+              <div class="dn">Day 2 · Sat</div><h4>High-energy team challenges</h4>
+              <div class="slot"><span class="t">09:30</span><span class="b"><b>Drone Racing League</b> — build, fly &amp; compete</span></div>
+              <div class="slot"><span class="t">14:00</span><span class="b"><b>Bridge Brigade</b> outdoor build challenge</span></div>
+              <div class="slot"><span class="t">19:30</span><span class="b">Awards night &amp; gala dinner</span></div>
+            </div>
+            <div class="day">
+              <span class="node"></span>
+              <div class="dn">Day 3 · Sun</div><h4>Reflection &amp; departure</h4>
+              <div class="slot"><span class="t">10:00</span><span class="b">Plantation walk &amp; leadership debrief</span></div>
+              <div class="slot"><span class="t">13:00</span><span class="b">Lunch &amp; departure to Bangalore</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resort -->
+        <div class="sec">
+          <div class="sec-h"><span class="ic"><svg><use href="#i-pin"/></svg></span><div><h2>Your resort</h2><p>Hand-picked for this group</p></div></div>
+          <div class="resort">
+            <div class="rimg"><span class="tier">Premium · Plantation</span></div>
+            <div class="rbody">
+              <h3>Trivik Hotels &amp; Resorts</h3>
+              <div class="loc"><svg><use href="#i-pin"/></svg> Chikmagalur, Karnataka</div>
+              <p>Luxury villas set across a working coffee plantation with mountain views, an infinity pool, spa and dedicated conference lawns — ideal for a senior leadership group.</p>
+              <div class="amen"><span>Infinity pool</span><span>Spa</span><span>Conference lawns</span><span>Mountain views</span><span>25 villas</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gallery -->
+        <div class="sec">
+          <div class="sec-h"><span class="ic"><svg><use href="#i-image"/></svg></span><div><h2>Gallery</h2><p>A glimpse of the experience</p></div></div>
+          <div class="gallery"><i class="g1"></i><i class="g2"></i><i class="g3"></i><i class="g4"></i><i class="g5"></i><i class="g6"></i></div>
+        </div>
+
+        <!-- Pricing -->
+        <div class="sec">
+          <div class="sec-h"><span class="ic"><svg><use href="#i-card"/></svg></span><div><h2>Investment</h2><p>All-inclusive · GST shown</p></div></div>
+          <div class="price-card">
+            <div class="pl"><span>Stay (2 nights × 100 pax)</span><strong>₹15,60,000</strong></div>
+            <div class="pl"><span>Activities (3)</span><strong>₹3,75,000</strong></div>
+            <div class="pl"><span>Add-ons &amp; logistics</span><strong>₹1,85,000</strong></div>
+            <div class="pl disc"><span>Loyalty discount (8%)</span><strong>− ₹1,69,600</strong></div>
+            <div class="pl"><span>GST (18%)</span><strong>₹3,51,072</strong></div>
+            <hr>
+            <div class="price-total"><div><small>Total investment</small><span class="amt">₹23,01,472</span></div></div>
+            <div class="pp"><span>Per participant</span><span class="mono">₹23,015</span></div>
+            <div class="deposit-note"><svg><use href="#i-shield"/></svg> Book with just a 25% deposit (₹5,75,368). Balance before the event.</div>
+          </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="sec">
+          <div class="sec-h"><span class="ic"><svg><use href="#i-spark"/></svg></span><div><h2>Trusted by teams like yours</h2><p>500+ corporate offsites delivered</p></div></div>
+          <div class="quote">
+            <p>"Trebound handled 220 people flawlessly. The Lost Dutchman session is still talked about a year later."</p>
+            <div class="who"><span class="av">RK</span><div><b>Ravi Kumar</b><span>HR Head · Infosys BPM</span></div></div>
+          </div>
+          <div class="logos"><span>Infosys</span> · <span>Wipro</span> · <span>Walmart</span> · <span>Amazon</span> · <span>Cisco</span></div>
+        </div>
+
+        <div style="height:8px"></div>
+
+        <!-- Sticky actions -->
+        <div class="actionbar">
+          <div class="ab-ic" data-open="changes" role="button" aria-label="Request changes"><svg><use href="#i-edit"/></svg></div>
+          <div class="ab-ic" onclick="toast('Generating branded PDF…')" role="button" aria-label="Download PDF"><svg><use href="#i-download"/></svg></div>
+          <button class="btn primary" data-open="esign">Approve &amp; sign <svg><use href="#i-pen"/></svg></button>
+        </div>
+      </section>
+
+      <!-- ============ SCREEN: VERSIONS ============ -->
+      <section class="screen" id="screen-versions">
+        <div class="appbar">
+          <div class="ab-brand"><button class="iconbtn" data-go="proposal" aria-label="Back" style="width:34px;height:34px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button> Version history</div>
+        </div>
+        <div class="page-pad">
+          <h1 class="page-title">3 versions of your proposal</h1>
+          <p class="page-sub">Your live link always shows the current version. Older ones stay viewable for your records.</p>
+
+          <div class="vrow current">
+            <div class="vno">v3</div>
+            <div class="vmeta">
+              <h4>Current <span class="tagpill cur">Active</span></h4>
+              <div class="vd">Sent 24 Jun · by Jemcy</div>
+              <div class="vsum">Added Drone Racing League · 8% loyalty discount applied</div>
+            </div>
+            <div class="vprice">₹23,01,472<div class="delta down">▼ ₹62k</div></div>
+          </div>
+
+          <div class="vrow">
+            <div class="vno">v2</div>
+            <div class="vmeta">
+              <h4>Superseded <span class="tagpill old">Older</span></h4>
+              <div class="vd">Sent 20 Jun · by Jemcy</div>
+              <div class="vsum">Upgraded resort to Trivik · headcount 90 → 100</div>
+            </div>
+            <div class="vprice">₹23,63,000<div class="delta up">▲ ₹2.1L</div></div>
+          </div>
+
+          <div class="vrow">
+            <div class="vno">v1</div>
+            <div class="vmeta">
+              <h4>Original <span class="tagpill old">Older</span></h4>
+              <div class="vd">Sent 18 Jun · by Jemcy</div>
+              <div class="vsum">Initial proposal · 90 pax · Golden Palms</div>
+            </div>
+            <div class="vprice">₹21,52,000</div>
+          </div>
+
+          <h2 style="font-size:16px;margin:24px 0 12px">Compare v2 → v3</h2>
+          <div class="diff-card">
+            <div class="diff-head"><div>Version 2</div><div>Version 3 · current</div></div>
+            <div class="diff-line"><div>Drone Racing League</div><div class="add"><b>+ Added</b> · ₹1,65,000</div></div>
+            <div class="diff-line"><div>Headcount: <b>100</b></div><div>Headcount: <b>100</b></div></div>
+            <div class="diff-line"><div>Discount: <b>0%</b></div><div class="chg">Discount: <b>8%</b> loyalty</div></div>
+            <div class="diff-line"><div class="rm">Cave dining add-on</div><div class="chg">Replaced with awards night</div></div>
+            <div class="diff-line"><div>Total: <b>₹23,63,000</b></div><div class="chg">Total: <b>₹23,01,472</b></div></div>
+          </div>
+          <div style="height:18px"></div>
+          <button class="btn ghost block" data-go="proposal">Back to current proposal</button>
+        </div>
+      </section>
+
+      <!-- ============ SCREEN: CHAT ============ -->
+      <section class="screen" id="screen-chat">
+        <div class="chat-wrap">
+          <div class="chat-head">
+            <button class="iconbtn" data-go="proposal" aria-label="Back" style="width:34px;height:34px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <span class="av">J</span>
+            <div><h4>Jemcy</h4><span class="on">Online · Trebound</span></div>
+          </div>
+          <div class="chat-body" id="chatBody">
+            <div class="daystamp">Today</div>
+            <div class="msg system">Proposal v3 was shared with you</div>
+            <div class="msg them">Hi Jeet! I've updated the plan with the Drone Racing League and applied your loyalty discount. Let me know what you think.<span class="time">10:24 AM</span></div>
+            <div class="msg me">Looks great. Can we make Day 2 a little lighter for the senior folks?<span class="time">10:31 AM</span></div>
+            <div class="msg them">Absolutely — I can move Bridge Brigade to an optional track and add a plantation walk instead. Want me to send a v4?<span class="time">10:33 AM</span></div>
+            <div class="msg me">Yes please. Also sharing this with finance for the deposit.<span class="time">10:34 AM</span></div>
+          </div>
+          <div class="chat-input">
+            <input placeholder="Message Jemcy…" aria-label="Type a message" id="chatField">
+            <button class="send" aria-label="Send" onclick="sendChat()"><svg><use href="#i-send"/></svg></button>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /viewport -->
+
+    <!-- ===== Modals (rendered inside the phone) ===== -->
+    <div class="sheet-scrim" id="sheet-changes">
+      <div class="sheet">
+        <div class="sheet-grip"></div>
+        <div class="sheet-h">
+          <div><h3>Request changes</h3><p>Tell Jemcy what to adjust — you'll get an updated version.</p></div>
+          <button class="sheet-x" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button>
+        </div>
+        <div class="sheet-body">
+          <div class="toggle-list">
+            <div class="toggle" data-toggle><span class="box"><svg><use href="#i-check"/></svg></span><span class="lab">Different resort<span>Swap for another option</span></span></div>
+            <div class="toggle on" data-toggle><span class="box"><svg><use href="#i-check"/></svg></span><span class="lab">Adjust the itinerary<span>Lighter Day 2 for seniors</span></span></div>
+            <div class="toggle" data-toggle><span class="box"><svg><use href="#i-check"/></svg></span><span class="lab">Change headcount<span>More or fewer participants</span></span></div>
+            <div class="toggle" data-toggle><span class="box"><svg><use href="#i-check"/></svg></span><span class="lab">Add / remove add-ons<span>Gifting, transport, F&amp;B…</span></span></div>
+            <div class="toggle" data-toggle><span class="box"><svg><use href="#i-check"/></svg></span><span class="lab">Revisit pricing<span>Budget or discount</span></span></div>
+          </div>
+          <label class="field" style="display:block;margin-bottom:16px"><span style="font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-500);display:block;margin-bottom:8px">Anything else?</span>
+            <textarea rows="3" placeholder="e.g. Move Bridge Brigade to an optional track and add a plantation walk.">Move Bridge Brigade to an optional track and add a plantation walk for senior leaders.</textarea>
+          </label>
+          <button class="btn primary block" onclick="closeSheet();toast('Change request sent to Jemcy')">Send request <svg><use href="#i-send"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet-scrim" id="sheet-esign">
+      <div class="sheet">
+        <div class="sheet-grip"></div>
+        <div class="sheet-h">
+          <div><h3>Approve &amp; sign</h3><p>Click-to-accept · legally binding e-signature</p></div>
+          <button class="sheet-x" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button>
+        </div>
+        <div class="sheet-body">
+          <div class="review-box">
+            <div class="rl"><span>Proposal</span><b>Muthoot Leadership Retreat · v3</b></div>
+            <div class="rl"><span>Participants</span><b>100 · 2 nights</b></div>
+            <div class="rl tot"><span>Total investment</span><b>₹23,01,472</b></div>
+          </div>
+          <div class="sign-pad">
+            <label>Type your full name to sign</label>
+            <input value="Jeet Muthoot" aria-label="Full name signature">
+          </div>
+          <div class="audit">
+            <div><div class="k">Email</div><div class="v">jeet@muthoot…</div></div>
+            <div><div class="k">Timestamp</div><div class="v">24 Jun, 10:42</div></div>
+            <div><div class="k">IP address</div><div class="v">103.21.58.x</div></div>
+            <div><div class="k">Version hash</div><div class="v">a3f9…c41</div></div>
+          </div>
+          <div class="legal"><svg><use href="#i-shield"/></svg><span>By signing you accept the proposal scope, pricing and Trebound's terms. A signed PDF with this audit trail will be emailed to you.</span></div>
+          <button class="btn primary block" onclick="goEsignSuccess()">I accept this proposal <svg><use href="#i-check"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet-scrim" id="sheet-pay">
+      <div class="sheet">
+        <div class="sheet-grip"></div>
+        <div class="sheet-h">
+          <div><h3>Pay deposit</h3><p>Secure your dates instantly</p></div>
+          <button class="sheet-x" data-close aria-label="Close"><svg><use href="#i-x"/></svg></button>
+        </div>
+        <div class="sheet-body">
+          <div class="pay-amt">
+            <small>25% deposit payable now</small>
+            <div class="big">₹5,75,368</div>
+            <div class="of">of ₹23,01,472 · balance before event</div>
+          </div>
+          <div class="paymethods">
+            <label class="pm on" data-pay><span class="pmic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M5 9l7-5 7 5M5 15l7 5 7-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="pmname">UPI<span>GPay, PhonePe, Paytm, BHIM</span></span><span class="radio"></span></label>
+            <label class="pm" data-pay><span class="pmic"><svg><use href="#i-card"/></svg></span><span class="pmname">Card<span>Visa, Mastercard, Amex, RuPay</span></span><span class="radio"></span></label>
+            <label class="pm" data-pay><span class="pmic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18" stroke-linecap="round"/></svg></span><span class="pmname">Netbanking<span>All major banks</span></span><span class="radio"></span></label>
+          </div>
+          <button class="btn primary block" onclick="goPaySuccess()">Pay ₹5,75,368 securely</button>
+          <div class="secure"><svg><use href="#i-lock"/></svg> Secured by <span class="rzp">Razorpay</span> · PCI-DSS compliant</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sheet-scrim" id="sheet-success">
+      <div class="sheet">
+        <div class="sheet-grip"></div>
+        <div class="success-screen" id="successContent"></div>
+      </div>
+    </div>
+
+  </div><!-- /phone -->
+
+  <p class="caption">Mockup 1 of the Trebound Client Portal · screens: OTP gate, branded proposal, version history &amp; diff, request changes, approve &amp; e-sign, pay deposit, rep chat. Use the pills above to jump between screens; tap the action bar to open the flows.</p>
+</div>
+
+<div class="toast" id="toast"><svg><use href="#i-spark"/></svg><span id="toastMsg"></span></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+const vp=$('#viewport');
+
+function showScreen(id){
+  $$('.screen').forEach(s=>s.classList.remove('active'));
+  $('#screen-'+id).classList.add('active');
+  $$('.screen-tabs button').forEach(b=>b.classList.toggle('active', b.dataset.go===id));
+  vp.scrollTop=0;
+}
+$$('[data-go]').forEach(el=>el.addEventListener('click',()=>showScreen(el.dataset.go)));
+
+/* OTP auto-advance */
+$$('#otpDigits input').forEach((inp,i,arr)=>{
+  inp.addEventListener('input',e=>{
+    inp.classList.toggle('filled', !!inp.value);
+    if(inp.value && arr[i+1]) arr[i+1].focus();
+  });
+  inp.addEventListener('keydown',e=>{ if(e.key==='Backspace'&&!inp.value&&arr[i-1])arr[i-1].focus(); });
+});
+// prefill demo OTP
+['1','7','4','9','2','6'].forEach((v,i)=>{const el=$$('#otpDigits input')[i];el.value=v;el.classList.add('filled')});
+
+/* Sheets */
+function openSheet(id){ $('#sheet-'+id).classList.add('open'); }
+function closeSheet(){ $$('.sheet-scrim').forEach(s=>s.classList.remove('open')); }
+$$('[data-open]').forEach(el=>el.addEventListener('click',()=>openSheet(el.dataset.open)));
+$$('[data-close]').forEach(el=>el.addEventListener('click',closeSheet));
+$$('.sheet-scrim').forEach(sc=>sc.addEventListener('click',e=>{if(e.target===sc)closeSheet()}));
+
+/* toggles */
+$$('[data-toggle]').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('on')));
+$$('[data-pay]').forEach(p=>p.addEventListener('click',()=>{$$('[data-pay]').forEach(x=>x.classList.remove('on'));p.classList.add('on')}));
+
+/* flows */
+function goEsignSuccess(){
+  $('#successContent').innerHTML=`
+    <div class="ring"><svg><use href="#i-check"/></svg></div>
+    <h3>Proposal approved</h3>
+    <p>Your signed copy is on its way to <b>jeet@muthootgroup.com</b>. Lock in your dates with a deposit.</p>
+    <div class="receipt">
+      <div class="rl"><span>Signed by</span><b>Jeet Muthoot</b></div>
+      <div class="rl"><span>Version</span><b>v3 · a3f9c41</b></div>
+      <div class="rl"><span>Signed at</span><b>24 Jun, 10:42</b></div>
+    </div>
+    <button class="btn primary block" onclick="closeSheet();openSheet('pay')">Pay 25% deposit now</button>
+    <div style="height:10px"></div>
+    <button class="btn ghost block" data-close>Maybe later</button>`;
+  closeSheet(); openSheet('success');
+  $('#successContent [data-close]').addEventListener('click',closeSheet);
+}
+function goPaySuccess(){
+  $('#successContent').innerHTML=`
+    <div class="ring"><svg><use href="#i-check"/></svg></div>
+    <h3>Booking confirmed</h3>
+    <p>Your deposit is received and your offsite is <b>booked</b>. The Trebound team will reach out with next steps.</p>
+    <div class="receipt">
+      <div class="rl"><span>Paid</span><b>₹5,75,368</b></div>
+      <div class="rl"><span>Method</span><b>UPI</b></div>
+      <div class="rl"><span>Txn ID</span><b>pay_Q9x2Lm</b></div>
+      <div class="rl"><span>Status</span><b style="color:var(--success)">Confirmed</b></div>
+    </div>
+    <button class="btn primary block" onclick="closeSheet();showScreen('proposal')">Back to proposal</button>
+    <div style="height:10px"></div>
+    <button class="btn ghost block" onclick="toast('Receipt downloaded')">Download receipt</button>`;
+  closeSheet(); openSheet('success');
+}
+
+/* chat */
+function sendChat(){
+  const f=$('#chatField'); if(!f.value.trim())return;
+  const b=$('#chatBody');
+  const m=document.createElement('div'); m.className='msg me';
+  m.innerHTML=f.value.replace(/[<>]/g,'')+'<span class="time">Now</span>';
+  b.appendChild(m); f.value=''; b.scrollTop=b.scrollHeight;
+  setTimeout(()=>{const r=document.createElement('div');r.className='msg them';r.innerHTML='Got it — sending you a v4 shortly!<span class="time">Now</span>';b.appendChild(r);b.scrollTop=b.scrollHeight;},900);
+}
+$('#chatField').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat()});
+
+/* toast */
+let tT;
+function toast(msg){ $('#toastMsg').textContent=msg; $('#toast').classList.add('show'); clearTimeout(tT); tT=setTimeout(()=>$('#toast').classList.remove('show'),2600); }
+window.toast=toast; window.closeSheet=closeSheet; window.openSheet=openSheet; window.showScreen=showScreen; window.sendChat=sendChat; window.goEsignSuccess=goEsignSuccess; window.goPaySuccess=goPaySuccess;
+</script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trebound · Self-Serve Calculator — Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="tokens.css" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:var(--font-sans);color:var(--ink-900);background:
+  radial-gradient(circle at 10% 0,rgba(255,181,116,.22),transparent 30rem),
+  radial-gradient(circle at 100% 5%,rgba(249,81,46,.1),transparent 26rem),var(--cream);-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+h1,h2,h3,h4{font-family:var(--font-display);margin:0;letter-spacing:-.02em}
+.mono{font-family:var(--font-mono)}
+
+.shell{display:flex;flex-direction:column;align-items:center;padding:24px 16px 70px}
+.shell-head{width:100%;max-width:560px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.shell-brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:800;font-size:18px}
+.logo-dot{width:32px;height:32px;border-radius:9px;background:var(--grad-brand);display:grid;place-items:center;color:#fff}
+.shell-brand small{display:block;font-family:var(--font-sans);font-weight:600;font-size:11px;color:var(--ink-500)}
+.steps{display:flex;gap:6px;background:var(--paper);border:1px solid var(--ink-200);padding:5px;border-radius:999px;box-shadow:var(--shadow-sm)}
+.steps button{border:0;background:transparent;border-radius:999px;padding:7px 13px;font-weight:700;font-size:12.5px;color:var(--ink-600)}
+.steps button.active{background:var(--ink-950);color:#fff}
+
+.card{width:100%;max-width:560px;background:var(--paper);border:1px solid var(--ink-200);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden}
+.screen{display:none}.screen.active{display:block}
+
+/* FORM */
+.form-hero{background:var(--grad-hero);color:#fff;padding:30px 26px 26px;position:relative;overflow:hidden}
+.form-hero .glow{position:absolute;inset:0;background:radial-gradient(circle at 85% 10%,rgba(255,181,116,.4),transparent 18rem)}
+.form-hero>*{position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:6px 11px;border-radius:999px}
+.eyebrow svg{width:13px;height:13px}
+.form-hero h1{font-size:28px;line-height:1.12;margin:14px 0 6px;max-width:380px}
+.form-hero p{color:rgba(255,255,255,.8);font-size:14px;line-height:1.5;max-width:380px}
+.form-body{padding:24px 26px 26px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{margin-bottom:0}.field.full{grid-column:1/-1}
+.field label{display:block;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-500);margin-bottom:7px}
+.field input,.field select{width:100%;border:1.5px solid var(--ink-200);border-radius:12px;padding:13px 13px;font:inherit;font-size:14.5px;outline:0;background:var(--cream-2);color:var(--ink-900)}
+.field input:focus,.field select:focus{border-color:var(--ember);box-shadow:0 0 0 4px rgba(249,81,46,.1);background:#fff}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{flex:1;min-width:calc(50% - 4px);border:1.5px solid var(--ink-200);background:var(--cream-2);border-radius:12px;padding:12px;font-weight:700;font-size:13px;color:var(--ink-700)}
+.seg button.on{border-color:var(--ember);background:var(--peach-soft);color:var(--ember-deep)}
+.consent{display:flex;gap:10px;align-items:flex-start;margin:18px 0;font-size:12px;color:var(--ink-600);line-height:1.5}
+.consent .box{width:22px;height:22px;border-radius:7px;border:2px solid var(--ember);background:var(--ember);display:grid;place-items:center;flex:none;color:#fff}
+.consent .box svg{width:13px;height:13px}
+.btn{width:100%;min-height:54px;border:0;border-radius:15px;font-weight:800;font-size:15.5px;display:flex;align-items:center;justify-content:center;gap:9px;font-family:var(--font-display)}
+.btn svg{width:18px;height:18px}
+.btn.primary{background:var(--grad-brand);color:#fff;box-shadow:0 12px 26px rgba(249,81,46,.3)}
+.btn.primary:active{transform:translateY(1px)}
+.btn.ghost{background:var(--paper);border:1.5px solid var(--ink-200);color:var(--ink-900)}
+.trust{display:flex;align-items:center;justify-content:center;gap:7px;color:var(--ink-500);font-size:11.5px;margin-top:14px}
+.trust svg{width:14px;height:14px}
+
+/* RESULT */
+.res-hero{position:relative;color:#fff;padding:24px 26px;overflow:hidden}
+.res-hero .bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(31,25,21,.2),rgba(31,25,21,.72)),url('https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=900&q=60');background-size:cover;background-position:center}
+.res-hero>*{position:relative}
+.res-hero .tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.18);padding:6px 11px;border-radius:999px}
+.res-hero .tag svg{width:13px;height:13px;flex:none}
+.res-hero h2{font-size:25px;margin:12px 0 4px}
+.res-hero .facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.res-hero .facts span{font-size:12px;font-weight:700;background:rgba(255,255,255,.15);padding:7px 11px;border-radius:9px;display:inline-flex;align-items:center;gap:6px}
+.res-hero .facts svg{width:13px;height:13px}
+.res-body{padding:22px 26px 26px}
+.est-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:18px}
+.est{border:1.5px solid var(--ink-200);border-radius:18px;padding:18px;position:relative}
+.est.low{border-color:var(--success)} .est.high{border-color:var(--peach);background:var(--cream-2)}
+.est .k{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-500);display:flex;align-items:center;gap:6px}
+.est .k svg{width:15px;height:15px;flex:none}
+.est.low .k{color:var(--success)} .est.high .k{color:var(--ember-deep)}
+.est .amt{font-family:var(--font-display);font-size:27px;font-weight:800;margin:10px 0 2px;letter-spacing:-.02em}
+.est .pp{font-size:12.5px;color:var(--ink-600)} .est .pp b{font-family:var(--font-mono)}
+.inclusions{background:var(--cream-2);border:1px solid var(--ink-100);border-radius:16px;padding:16px;margin-bottom:16px}
+.inclusions h4{font-size:13px;margin-bottom:11px;display:flex;align-items:center;gap:7px}
+.inclusions h4 svg{width:15px;height:15px;color:var(--ember)}
+.inc-list{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.inc-list div{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--ink-700)}
+.inc-list svg{width:15px;height:15px;color:var(--success);flex:none}
+.season-note{display:flex;gap:9px;font-size:12px;color:var(--ink-600);background:var(--info-soft);border-radius:12px;padding:12px 14px;margin-bottom:18px;line-height:1.45}
+.season-note svg{width:16px;height:16px;color:var(--info);flex:none;margin-top:1px}
+.res-actions{display:grid;gap:10px}
+.secondary-row{display:flex;gap:10px}.secondary-row .btn{min-height:46px;font-size:13.5px}
+
+/* CONFIRM */
+.confirm{text-align:center;padding:40px 30px 36px}
+.confirm .ring{width:96px;height:96px;border-radius:50%;background:var(--peach-soft);display:grid;place-items:center;margin:0 auto 20px;position:relative}
+.confirm .ring svg{width:46px;height:46px;color:var(--ember)}
+.confirm h2{font-size:25px} .confirm p{color:var(--ink-600);font-size:14px;line-height:1.55;margin:12px auto 22px;max-width:340px}
+.confirm .mailbox{display:inline-flex;align-items:center;gap:9px;background:var(--cream-2);border:1px solid var(--ink-100);border-radius:12px;padding:11px 16px;font-weight:700;font-size:13.5px;margin-bottom:24px}
+.confirm .mailbox svg{width:17px;height:17px;color:var(--ember)}
+.next{text-align:left;background:var(--paper);border:1px solid var(--ink-200);border-radius:16px;padding:6px 16px;margin-bottom:22px}
+.next .row{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--ink-100)}
+.next .row:last-child{border-bottom:0}
+.next .n{width:30px;height:30px;border-radius:9px;background:var(--peach-soft);color:var(--ember-deep);font-family:var(--font-display);font-weight:800;display:grid;place-items:center;flex:none;font-size:13px}
+.next .t{font-size:13px;text-align:left}.next .t b{display:block;font-size:13.5px}.next .t span{color:var(--ink-500);font-size:12px}
+
+.caption{max-width:560px;text-align:center;color:var(--ink-500);font-size:12px;margin-top:18px;line-height:1.5}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(14px);background:var(--ink-950);color:#fff;padding:13px 18px;border-radius:14px;font-weight:700;font-size:13px;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:.25s;z-index:200;display:flex;gap:9px;align-items:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.toast svg{width:17px;height:17px;color:var(--peach)}
+@media(max-width:560px){.fg{grid-template-columns:1fr}.est-grid,.inc-list{grid-template-columns:1fr}.card{border-radius:22px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+</svg>
+
+<div class="shell">
+  <div class="shell-head">
+    <div class="shell-brand"><span class="logo-dot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span>
+      <div>Instant Quote<small>Public calculator · mobile-first</small></div></div>
+    <nav class="steps">
+      <button class="active" data-go="form">Form</button>
+      <button data-go="result">Estimate</button>
+      <button data-go="confirm">Sent</button>
+    </nav>
+  </div>
+
+  <div class="card">
+    <!-- FORM -->
+    <section class="screen active" id="form">
+      <div class="form-hero">
+        <div class="glow"></div>
+        <span class="eyebrow"><svg><use href="#i-spark"/></svg> 60-second estimate</span>
+        <h1>Plan your team offsite. Get a price instantly.</h1>
+        <p>Tell us a little about your team and we'll email a tailored estimate — no sales call required.</p>
+      </div>
+      <div class="form-body">
+        <div class="fg">
+          <div class="field full"><label>Your name</label><input value="Ananya Rao" placeholder="Full name"></div>
+          <div class="field"><label>Work email</label><input value="ananya@techcorp.in" placeholder="you@company.com" type="email"></div>
+          <div class="field"><label>Company</label><input value="TechCorp India" placeholder="Company name"></div>
+          <div class="field"><label>Team size</label><input value="60" type="number" inputmode="numeric"></div>
+          <div class="field"><label>Nights</label><select><option>1 night</option><option selected>2 nights</option><option>3 nights</option></select></div>
+          <div class="field full"><label>Destination</label><select><option>Help me choose</option><option selected>Goa</option><option>Coorg</option><option>Chikmagalur</option><option>Bangalore</option><option>Dubai</option></select></div>
+          <div class="field full"><label>Preferred dates</label><input type="date" value="2026-10-12"></div>
+          <div class="field full"><label>Experience type</label>
+            <div class="seg">
+              <button type="button" class="on">Team outing</button>
+              <button type="button">Corporate offsite</button>
+              <button type="button">Leadership retreat</button>
+              <button type="button">Conference</button>
+            </div>
+          </div>
+        </div>
+        <div class="consent"><span class="box"><svg><use href="#i-check"/></svg></span><span>I agree to be contacted by Trebound about my enquiry and accept the <b>privacy policy</b> (DPDP Act consent).</span></div>
+        <button class="btn primary" data-go="result">Get my instant estimate <svg><use href="#i-arrow"/></svg></button>
+        <div class="trust"><svg><use href="#i-shield"/></svg> No spam · your details stay private</div>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section class="screen" id="result">
+      <div class="res-hero">
+        <div class="bg"></div>
+        <span class="tag"><svg><use href="#i-spark"/></svg> Your estimate is ready</span>
+        <h2>Goa Team Offsite</h2>
+        <div class="facts">
+          <span><svg><use href="#i-users"/></svg> 60 participants</span>
+          <span><svg><use href="#i-moon"/></svg> 2 nights</span>
+          <span><svg><use href="#i-pin"/></svg> Goa</span>
+        </div>
+      </div>
+      <div class="res-body">
+        <div class="est-grid">
+          <div class="est low">
+            <div class="k"><svg><use href="#i-moon"/></svg> Low season</div>
+            <div class="amt">₹9,84,000</div>
+            <div class="pp">≈ <b>₹16,400</b> / person</div>
+          </div>
+          <div class="est high">
+            <div class="k"><svg><use href="#i-sun"/></svg> High season</div>
+            <div class="amt">₹12,42,000</div>
+            <div class="pp">≈ <b>₹20,700</b> / person</div>
+          </div>
+        </div>
+        <div class="inclusions">
+          <h4><svg><use href="#i-check"/></svg> Indicative inclusions</h4>
+          <div class="inc-list">
+            <div><svg><use href="#i-check"/></svg> Beach resort stay</div>
+            <div><svg><use href="#i-check"/></svg> All meals</div>
+            <div><svg><use href="#i-check"/></svg> 2 team activities</div>
+            <div><svg><use href="#i-check"/></svg> Transfers</div>
+            <div><svg><use href="#i-check"/></svg> Welcome kit</div>
+            <div><svg><use href="#i-check"/></svg> On-ground crew</div>
+          </div>
+        </div>
+        <div class="season-note"><svg><use href="#i-info"/></svg><span><b>Goa seasons:</b> Low = Apr–Sep · High = Oct–Mar. Your Oct date falls in high season — a detailed plan can optimise dates and pricing.</span></div>
+        <div class="res-actions">
+          <button class="btn primary" data-go="confirm">Request a detailed plan <svg><use href="#i-arrow"/></svg></button>
+          <div class="secondary-row">
+            <button class="btn ghost" data-go="confirm"><svg><use href="#i-mail"/></svg> Email me this</button>
+            <button class="btn ghost" onclick="toast('Connecting you to an expert…')"><svg><use href="#i-phone"/></svg> Talk to expert</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONFIRM -->
+    <section class="screen" id="confirm">
+      <div class="confirm">
+        <div class="ring"><svg><use href="#i-mail"/></svg></div>
+        <h2>Check your inbox</h2>
+        <p>We've emailed your Goa offsite estimate and one of our experts is preparing a detailed, tailored plan.</p>
+        <div class="mailbox"><svg><use href="#i-mail"/></svg> ananya@techcorp.in</div>
+        <div class="next">
+          <div class="row"><span class="n">1</span><span class="t"><b>Estimate in your inbox</b><span>Mirrors the figures you just saw</span></span></div>
+          <div class="row"><span class="n">2</span><span class="t"><b>A Trebound expert reaches out</b><span>Within a few hours with a detailed plan</span></span></div>
+          <div class="row"><span class="n">3</span><span class="t"><b>View, tweak, approve &amp; pay online</b><span>One secure link — no email back-and-forth</span></span></div>
+        </div>
+        <button class="btn primary" onclick="window.open('client-portal.html','_blank')">Preview your client portal <svg><use href="#i-arrow"/></svg></button>
+      </div>
+    </section>
+  </div>
+
+  <p class="caption">Mockup 3 of 4 · Public self-serve calculator. One-screen form → instant low/high estimate → confirmation. Submitting creates a lead + draft proposal v1 in the backend (unassigned queue) and pushes to Pipedrive.</p>
+</div>
+
+<div class="toast" id="toast"><svg><use href="#i-spark"/></svg><span id="toastMsg"></span></div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+function go(id){$$('.screen').forEach(s=>s.classList.remove('active'));$('#'+id).classList.add('active');$$('.steps button').forEach(b=>b.classList.toggle('active',b.dataset.go===id));window.scrollTo(0,0)}
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+$$('.seg button').forEach(b=>b.addEventListener('click',()=>{b.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on')}));
+let tT;function toast(m){$('#toastMsg').textContent=m;$('#toast').classList.add('show');clearTimeout(tT);tT=setTimeout(()=>$('#toast').classList.remove('show'),2400)}
+window.toast=toast;
+</script>
+</body>
+</html>
